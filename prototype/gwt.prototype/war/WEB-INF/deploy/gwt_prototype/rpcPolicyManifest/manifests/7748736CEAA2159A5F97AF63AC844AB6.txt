@@ -1,0 +1,2 @@
+serviceClass: gwt.prototype.client.GreetingService
+path: 6587A1A1B607F63866EC1031E3B17992.gwt.rpc
