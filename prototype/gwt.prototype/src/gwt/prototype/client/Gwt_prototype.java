@@ -41,6 +41,7 @@ public class Gwt_prototype implements EntryPoint {
 	public void onModuleLoad() {
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
+		final TextBox selfmadeField = new TextBox(); // new created textbox for testing
 		nameField.setText("GWT User");
 		final Label errorLabel = new Label();
 
@@ -50,6 +51,7 @@ public class Gwt_prototype implements EntryPoint {
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
 		RootPanel.get("nameFieldContainer").add(nameField);
+		RootPanel.get("selfmadeContainer").add(selfmadeField); // test to add something to the html panel
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
 
