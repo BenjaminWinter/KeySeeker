@@ -1,6 +1,7 @@
 package gwt.prototype.client;
 
 import gwt.prototype.shared.FieldVerifier;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -13,7 +14,9 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -41,7 +44,8 @@ public class Gwt_prototype implements EntryPoint {
 	public void onModuleLoad() {
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
-		final TextBox selfmadeField = new TextBox(); // new created textbox for testing
+		final PasswordTextBox selfmadeField = new PasswordTextBox(); // new created textbox for testing
+		final TextArea selfmadeTextArea = new TextArea(); // TextArea for testing chat input
 		nameField.setText("GWT User");
 		final Label errorLabel = new Label();
 
@@ -54,6 +58,7 @@ public class Gwt_prototype implements EntryPoint {
 		RootPanel.get("selfmadeContainer").add(selfmadeField); // test to add something to the html panel
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
+		RootPanel.get("selfmadeTextArea").add(selfmadeTextArea);
 
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);
