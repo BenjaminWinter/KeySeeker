@@ -46,9 +46,16 @@ public class Gwt_prototype implements EntryPoint {
 		final TextBox nameField = new TextBox();
 		final PasswordTextBox selfmadeField = new PasswordTextBox(); // new created textbox for testing
 		final TextArea selfmadeTextArea = new TextArea(); // TextArea for testing chat input
-		nameField.setText("GWT User");
+		final TextArea chatTextArea = new TextArea();
 		final Label errorLabel = new Label();
-
+		
+		nameField.setText("GWT User");
+		selfmadeTextArea.setWidth("500px");
+		selfmadeTextArea.setHeight("20px");
+		chatTextArea.setWidth("500px");
+		chatTextArea.setHeight("500px");
+		chatTextArea.setReadOnly(true);
+		
 		// We can add style names to widgets
 		sendButton.addStyleName("sendButton");
 
@@ -59,6 +66,7 @@ public class Gwt_prototype implements EntryPoint {
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
 		RootPanel.get("selfmadeTextArea").add(selfmadeTextArea);
+		RootPanel.get("chatTextArea").add(chatTextArea);
 
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);
@@ -155,5 +163,19 @@ public class Gwt_prototype implements EntryPoint {
 		MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);
+		
+		//Add a handler to send and add the entered messages to the chatTextArea 
+		selfmadeTextArea.addKeyUpHandler(new KeyUpHandler() {
+			public void onKeyUp(KeyUpEvent event) {
+				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+					String chatMessage = selfmadeTextArea.getText(); //get the entered message
+					String chatHistory = chatTextArea.getText();     //get the content of the chatTextArea
+					
+					// add the entered message to the chat and uses the current name in the nameField as username
+					chatTextArea.setText(chatHistory + nameField.getText() + ":   " + chatMessage); 
+					selfmadeTextArea.setText("");
+				}
+			}
+		});
 	}
 }
