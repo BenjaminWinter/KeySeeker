@@ -45,16 +45,16 @@ public class Gwt_prototype implements EntryPoint {
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
 		final PasswordTextBox selfmadeField = new PasswordTextBox(); // new created textbox for testing
-		final TextArea selfmadeTextArea = new TextArea(); // TextArea for testing chat input
-		final TextArea chatTextArea = new TextArea();
+		final TextArea InputArea = new TextArea(); // TextArea for testing chat input
+		final TextArea OutputArea = new TextArea();
 		final Label errorLabel = new Label();
 		
 		nameField.setText("GWT User");
-		selfmadeTextArea.setWidth("500px");
-		selfmadeTextArea.setHeight("20px");
-		chatTextArea.setWidth("500px");
-		chatTextArea.setHeight("500px");
-		chatTextArea.setReadOnly(true);
+		InputArea.setWidth("500px");
+		InputArea.setHeight("20px");
+		OutputArea.setWidth("500px");
+		OutputArea.setHeight("500px");
+		OutputArea.setReadOnly(true);
 		
 		// We can add style names to widgets
 		sendButton.addStyleName("sendButton");
@@ -65,8 +65,8 @@ public class Gwt_prototype implements EntryPoint {
 		RootPanel.get("selfmadeContainer").add(selfmadeField); // test to add something to the html panel
 		RootPanel.get("sendButtonContainer").add(sendButton);
 		RootPanel.get("errorLabelContainer").add(errorLabel);
-		RootPanel.get("selfmadeTextArea").add(selfmadeTextArea);
-		RootPanel.get("chatTextArea").add(chatTextArea);
+		RootPanel.get("selfmadeTextArea").add(InputArea);
+		RootPanel.get("chatTextArea").add(OutputArea);
 
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);
@@ -165,16 +165,45 @@ public class Gwt_prototype implements EntryPoint {
 		nameField.addKeyUpHandler(handler);
 		
 		//Add a handler to send and add the entered messages to the chatTextArea 
-		selfmadeTextArea.addKeyUpHandler(new KeyUpHandler() {
+		InputArea.addKeyUpHandler(new KeyUpHandler() {
+			GreetingServiceAsync proxy = (GreetingServiceAsync)GWT.create(GreetingService.class);
+			
+			AsyncCallback<String> callback = new AsyncCallback<String>(){
+
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onSuccess(String result) {
+					
+				}
+				
+			};
+			
+			
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-					String chatMessage = selfmadeTextArea.getText(); //get the entered message
-					String chatHistory = chatTextArea.getText();     //get the content of the chatTextArea
+					String chatMessage = InputArea.getText(); //get the entered message
+//					String chatHistory = chatTextArea.getText();     //get the content of the chatTextArea
+//					dialogBox.setText("Remote Procedure Call");
+					proxy.setOutput(chatMessage,callback);
+					OutputArea.setText(serverResponseLabel.getText()); 
+					InputArea.setText("");
+					serverResponseLabel.removeStyleName("serverResponseLabelError");
+					serverResponseLabel.setHTML(chatMessage);
+					dialogBox.center();
+					closeButton.setFocus(true);
 					
-					// add the entered message to the chat and uses the current name in the nameField as username
-					chatTextArea.setText(chatHistory + nameField.getText() + ":   " + chatMessage); 
-					selfmadeTextArea.setText("");
+					
+//					
+//					// add the entered message to the chat and uses the current name in the nameField as username
+//					chatTextArea.setText(chatHistory + nameField.getText() + ":   " + chatMessage); 
+//					selfmadeTextArea.setText("");
 				}
+				
 			}
 		});
 	}
