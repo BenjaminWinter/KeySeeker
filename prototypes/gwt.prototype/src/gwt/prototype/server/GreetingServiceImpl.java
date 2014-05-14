@@ -33,7 +33,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 	}
 	public String setOutput(String username, String inputMessage) throws IllegalArgumentException {
 		// Verify that the input is valid. 
-		if (!FieldVerifier.isValidName(inputMessage)) {
+		if (!FieldVerifier.isValidName(username.trim())) {
 			// If the input is not valid, throw an IllegalArgumentException back to
 			// the client.
 			throw new IllegalArgumentException(
