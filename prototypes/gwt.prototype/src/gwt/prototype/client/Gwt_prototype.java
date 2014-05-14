@@ -187,16 +187,16 @@ public class Gwt_prototype implements EntryPoint {
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 					String chatMessage = InputArea.getText(); //get the entered message
-//					String chatHistory = chatTextArea.getText();     //get the content of the chatTextArea
+					String chatHistory = OutputArea.getText();     //get the content of the chatTextArea
 //					dialogBox.setText("Remote Procedure Call");
 					proxy.setOutput(chatMessage,callback);
-					OutputArea.setText(serverResponseLabel.getText()); 
+					 
 					InputArea.setText("");
 					serverResponseLabel.removeStyleName("serverResponseLabelError");
 					serverResponseLabel.setHTML(chatMessage);
-					dialogBox.center();
-					closeButton.setFocus(true);
-					
+//					dialogBox.center();
+//					closeButton.setFocus(true);
+					OutputArea.setText(chatHistory + nameField.getText() + ":   " + serverResponseLabel.getText());
 					
 //					
 //					// add the entered message to the chat and uses the current name in the nameField as username
