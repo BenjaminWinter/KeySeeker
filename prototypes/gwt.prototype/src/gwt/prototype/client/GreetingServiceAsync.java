@@ -9,6 +9,6 @@ public interface GreetingServiceAsync {
 	void greetServer(String input, AsyncCallback<String> callback)
 			throws IllegalArgumentException;
 
-	void setOutput(String input, AsyncCallback<String> callback)
+	void setOutput(String username, String inputMessage, AsyncCallback<String> callback)
 			throws IllegalArgumentException;;
 }
