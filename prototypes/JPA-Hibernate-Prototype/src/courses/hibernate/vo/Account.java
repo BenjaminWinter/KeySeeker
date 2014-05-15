@@ -2,18 +2,31 @@ package courses.hibernate.vo;
 
 import java.util.Date;
 
+import javax.persistence.*;
+
 /**
  * Domain object representing an Account
  */
+@Entity
+@Table(name = "ACCOUNT")
 public class Account {
 	public static final String ACCOUNT_TYPE_SAVINGS = "SAVINGS";
 	public static final String ACCOUNT_TYPE_CHECKING = "CHECKING";
-
+	
+	@Id @GeneratedValue
+	@Column(name = "ACCOUNT_ID")
 	private long accountId;
+	
+	@Column(name = "ACCOUNT_TYPE")
 	private String accountType;
+	
+	@Column(name = "CREATION_DATE")
 	private Date creationDate;
+	
+	@Column(name = "BALANCE")
 	private double balance;
 	
+	public Account(){}
 	/**
 	 * Get accountId
 	 * 

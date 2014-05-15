@@ -29,6 +29,6 @@
 		<property name="format_sql">false</property>
 
 		<!--  Load all mapping files -->
-		<mapping resource="Account.hbm.xml" />
+		<mapping class="courses.hibernate.vo.Account" />
 	</session-factory>
 </hibernate-configuration>
