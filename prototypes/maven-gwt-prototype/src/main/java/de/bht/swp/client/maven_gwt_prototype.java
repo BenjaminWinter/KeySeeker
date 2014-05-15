@@ -15,10 +15,14 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.bht.swp.client.GreetingService;
+import de.bht.swp.client.GreetingServiceAsync;
 import de.bht.swp.shared.FieldVerifier;
 
 /**
@@ -46,42 +50,18 @@ public class maven_gwt_prototype implements EntryPoint {
   public void onModuleLoad() {
     final Button sendButton = new Button( messages.sendButton() );
     final TextBox nameField = new TextBox();
-    nameField.setText( messages.nameField() );
+    final PasswordTextBox selfmadeField = new PasswordTextBox(); // new created textbox for testing
+	final TextArea InputArea = new TextArea(); // TextArea for testing chat input
+	final TextArea OutputArea = new TextArea();
     final Label errorLabel = new Label();
+  
     
-    
-    // Make a command that we will execute from all leaves.
-    Command cmd = new Command() {
-      public void execute() {
-        Window.alert("You selected a menu item!");
-      }
-    };
-
-    // Make some sub-menus that we will cascade from the top menu.
-    MenuBar fooMenu = new MenuBar(true);
-    fooMenu.addItem("the", cmd);
-    fooMenu.addItem("foo", cmd);
-    fooMenu.addItem("menu", cmd);
-
-    MenuBar barMenu = new MenuBar(true);
-    barMenu.addItem("the", cmd);
-    barMenu.addItem("bar", cmd);
-    barMenu.addItem("menu", cmd);
-
-    MenuBar bazMenu = new MenuBar(true);
-    bazMenu.addItem("the", cmd);
-    bazMenu.addItem("baz", cmd);
-    bazMenu.addItem("menu", cmd);
-
-    // Make a new menu bar, adding a few cascading menus to it.
-    MenuBar menu = new MenuBar();
-    menu.addItem("foo", fooMenu);
-    menu.addItem("bar", barMenu);
-    menu.addItem("baz", bazMenu);
-
-    // Add it to the root panel.
-    RootPanel.get("menubarContainer").add(menu);
-    
+    nameField.setText( messages.nameField() );
+    InputArea.setWidth("500px");
+	InputArea.setHeight("20px");
+	OutputArea.setWidth("500px");
+	OutputArea.setHeight("500px");
+	OutputArea.setReadOnly(true);
 
     // We can add style names to widgets
     sendButton.addStyleName("sendButton");
@@ -89,8 +69,11 @@ public class maven_gwt_prototype implements EntryPoint {
     // Add the nameField and sendButton to the RootPanel
     // Use RootPanel.get() to get the entire body element
     RootPanel.get("nameFieldContainer").add(nameField);
+    RootPanel.get("selfmadeContainer").add(selfmadeField); // test to add something to the html panel
     RootPanel.get("sendButtonContainer").add(sendButton);
     RootPanel.get("errorLabelContainer").add(errorLabel);
+	RootPanel.get("selfmadeTextArea").add(InputArea);
+	RootPanel.get("chatTextArea").add(OutputArea);
 
     // Focus the cursor on the name field when the app loads
     nameField.setFocus(true);
@@ -183,5 +166,52 @@ public class maven_gwt_prototype implements EntryPoint {
     MyHandler handler = new MyHandler();
     sendButton.addClickHandler(handler);
     nameField.addKeyUpHandler(handler);
+    
+    //Add a handler to send and add the entered messages to the chatTextArea 
+		InputArea.addKeyUpHandler(new KeyUpHandler() {
+			GreetingServiceAsync proxy = (GreetingServiceAsync)GWT.create(GreetingService.class);
+			
+			AsyncCallback<String> callback = new AsyncCallback<String>(){
+
+//				@Override
+				public void onFailure(Throwable caught) {
+					// Show the RPC error message to the user
+					dialogBox
+							.setText("Remote Procedure Call - Failure");
+					serverResponseLabel
+							.addStyleName("serverResponseLabelError");
+					serverResponseLabel.setHTML(SERVER_ERROR);
+					dialogBox.center();
+					closeButton.setFocus(true);
+				}
+
+//				@Override
+				public void onSuccess(String result) {
+					String chatHistory = OutputArea.getText(); 
+					OutputArea.setText(chatHistory + result);
+				}
+			};
+			
+			public void onKeyUp(KeyUpEvent event) {
+				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+					String chatMessage = InputArea.getText(); //get the entered message
+					String username = nameField.getText();
+					proxy.setOutput(username, chatMessage, callback);
+					InputArea.setText("");
+					
+//					dialogBox.setText("Remote Procedure Call");
+//					serverResponseLabel.removeStyleName("serverResponseLabelError");
+//					serverResponseLabel.setHTML(chatMessage);
+//					dialogBox.center();
+//					closeButton.setFocus(true);
+//					OutputArea.setText(chatHistory + nameField.getText() + ":   " + serverResponseLabel.getText());
+					
+//					
+//					// add the entered message to the chat and uses the current name in the nameField as username
+//					chatTextArea.setText(chatHistory + nameField.getText() + ":   " + chatMessage); 
+//					selfmadeTextArea.setText("");
+				}
+			}
+		});
   }
 }

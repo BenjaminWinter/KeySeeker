@@ -2,6 +2,7 @@ package gwt.prototype.server;
 
 import gwt.prototype.client.GreetingService;
 import gwt.prototype.shared.FieldVerifier;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
@@ -30,9 +31,9 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		return "Hello, " + input + "!<br><br>I am running " + serverInfo
 				+ ".<br><br>It looks like you are using:<br>" + userAgent;
 	}
-	public String setOutput(String input) throws IllegalArgumentException {
+	public String setOutput(String username, String inputMessage) throws IllegalArgumentException {
 		// Verify that the input is valid. 
-		if (!FieldVerifier.isValidName(input)) {
+		if (!FieldVerifier.isValidName(username.trim())) {
 			// If the input is not valid, throw an IllegalArgumentException back to
 			// the client.
 			throw new IllegalArgumentException(
@@ -43,15 +44,18 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
 
 		// Escape data from the client to avoid cross-site script vulnerabilities.
-		input = escapeHtml(input);
+		inputMessage = escapeHtml(inputMessage);
 		userAgent = escapeHtml(userAgent);
 		
-	
-
-		return (input); 
-//		selfmadeTextArea.setText("");
+		inputMessage = checkInputMessage(inputMessage);
+		
+		return (username + ":   " + inputMessage); 
 	}
 
+	private String checkInputMessage(String inputMessage) {
+		// check inputMessage and filter profanity here
+		return inputMessage;
+	}
 	/**
 	 * Escape an html string. Escaping data received from the client helps to
 	 * prevent cross-site script vulnerabilities.

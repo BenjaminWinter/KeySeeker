@@ -172,31 +172,36 @@ public class Gwt_prototype implements EntryPoint {
 
 				@Override
 				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
+					// Show the RPC error message to the user
+					dialogBox
+							.setText("Remote Procedure Call - Failure");
+					serverResponseLabel
+							.addStyleName("serverResponseLabelError");
+					serverResponseLabel.setHTML(SERVER_ERROR);
+					dialogBox.center();
+					closeButton.setFocus(true);
 				}
 
 				@Override
 				public void onSuccess(String result) {
-					
+					String chatHistory = OutputArea.getText(); 
+					OutputArea.setText(chatHistory + result);
 				}
-				
 			};
-			
 			
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 					String chatMessage = InputArea.getText(); //get the entered message
-//					String chatHistory = chatTextArea.getText();     //get the content of the chatTextArea
-//					dialogBox.setText("Remote Procedure Call");
-					proxy.setOutput(chatMessage,callback);
-					OutputArea.setText(serverResponseLabel.getText()); 
+					String username = nameField.getText();
+					proxy.setOutput(username, chatMessage, callback);
 					InputArea.setText("");
-					serverResponseLabel.removeStyleName("serverResponseLabelError");
-					serverResponseLabel.setHTML(chatMessage);
-					dialogBox.center();
-					closeButton.setFocus(true);
 					
+//					dialogBox.setText("Remote Procedure Call");
+//					serverResponseLabel.removeStyleName("serverResponseLabelError");
+//					serverResponseLabel.setHTML(chatMessage);
+//					dialogBox.center();
+//					closeButton.setFocus(true);
+//					OutputArea.setText(chatHistory + nameField.getText() + ":   " + serverResponseLabel.getText());
 					
 //					
 //					// add the entered message to the chat and uses the current name in the nameField as username
