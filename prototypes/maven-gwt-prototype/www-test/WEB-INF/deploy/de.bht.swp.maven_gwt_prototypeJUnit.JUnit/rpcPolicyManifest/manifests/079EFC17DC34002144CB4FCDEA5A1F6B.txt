@@ -1,0 +1,2 @@
+serviceClass: de.bht.swp.client.GreetingService
+path: 24932FF7D9218B0C6B14E1E2DED45BE7.gwt.rpc
