@@ -1,4 +1,4 @@
-package courses.hibernate.service;
+package courses.hibernate.test;
 
 import java.util.Date;
 

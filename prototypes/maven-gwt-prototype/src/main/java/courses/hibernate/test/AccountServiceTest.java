@@ -1,12 +1,12 @@
-package courses.hibernate.service;
+package courses.hibernate.test;
 
 import java.util.Date;
 
-import org.junit.Assert;
-
 import org.hibernate.Session;
+import org.junit.Assert;
 import org.junit.Test;
 
+import courses.hibernate.service.AccountService;
 import courses.hibernate.util.HibernateUtil;
 import courses.hibernate.vo.Account;
 
@@ -153,9 +153,9 @@ public class AccountServiceTest extends ServiceTest {
 		System.out.println("var anotherCopy = " + anotherCopy);
 
 		// make sure the one we just pulled back from
-		// the database DOES NOT HAVE the updated balance
+		// the database does have the updated balance
 		// ----------------------------------------------
-		Assert.assertFalse(anotherCopy.getAccountType().equals(
+		Assert.assertTrue(anotherCopy.getAccountType().equals(
 				Account.ACCOUNT_TYPE_CHECKING));
 
 		session2.getTransaction().commit();

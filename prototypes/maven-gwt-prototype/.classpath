@@ -32,5 +32,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/JPA-Hibernate-Prototype/lib/ejb3-persistence.jar"/>
+	<classpathentry kind="src" path="config"/>
 	<classpathentry kind="output" path="target/maven-gwt-prototype-1.0-SNAPSHOT/WEB-INF/classes"/>
 </classpath>
