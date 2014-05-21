@@ -1,10 +1,13 @@
 package de.bht.swp.client;
 
-import de.bht.swp.shared.FieldVerifier;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
+
+import de.bht.swp.client.GreetingService;
+import de.bht.swp.client.GreetingServiceAsync;
+import de.bht.swp.shared.FieldVerifier;
 
 /**
  * GWT JUnit <b>integration</b> tests must extend GWTTestCase.

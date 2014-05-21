@@ -3,12 +3,14 @@ package de.bht.swp.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+import de.bht.swp.client.GreetingService;
+
 public interface GreetingServiceAsync
 {
 
     /**
      * GWT-RPC service  asynchronous (client-side) interface
-     * @see de.bht.swp.client.GreetingService d
+     * @see de.bht.swp.client.GreetingService
      */
     void greetServer( java.lang.String name, AsyncCallback<java.lang.String> callback );
 
