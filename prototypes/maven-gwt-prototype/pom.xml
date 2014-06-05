@@ -67,11 +67,7 @@
     <artifactId>struts2-core</artifactId>
     <version>2.3.15.2</version>
 	</dependency>
-	<dependency>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-resources-plugin</artifactId>
-    <version>2.4.3</version>
-	</dependency>
+	<!--  in plugin -->
 	   <dependency> 
           <groupId>org.hibernate</groupId> 
           <artifactId>hibernate-annotations</artifactId> 
@@ -119,6 +115,12 @@
           <i18nMessagesBundle>de.bht.swp.client.Messages</i18nMessagesBundle>
         </configuration>
       </plugin>
+      
+      	<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-resources-plugin</artifactId>
+    <version>2.4.3</version>
+	</plugin>
 
       <!-- Copy static web files before executing gwt:run -->
       <plugin>
@@ -142,8 +144,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.3.2</version>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.7</source>
+          <target>1.7</target>
         </configuration>
       </plugin>
     </plugins>
