@@ -5,6 +5,8 @@ import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
@@ -34,6 +36,7 @@ public class prototype implements EntryPoint {
   private final Messages messages = GWT.create(Messages.class);
   
   
+  private final int[] INIT_CHAR_POSITION = {4, 2};
   
   protected int charPosX;
   protected int charPosY;
@@ -62,8 +65,8 @@ public class prototype implements EntryPoint {
 	  Image mapImage = new Image("/images/testTiles.jpg");
 	  mapImageElement = ImageElement.as(mapImage.getElement());
 	  
-	  charPosX = 4;
-	  charPosY = 2;
+	  charPosX = INIT_CHAR_POSITION[0];
+	  charPosY = INIT_CHAR_POSITION[1];
 	  
 	  mapImage.addLoadHandler(new LoadHandler() {
 	        public void onLoad(LoadEvent event) {
@@ -73,6 +76,28 @@ public class prototype implements EntryPoint {
 	  
 	  RootPanel.get().add(canvas);
 	  RootPanel.get().add(miniMapCanvas);
+	  
+	  canvas.addClickHandler(new ClickHandler() {
+		
+		public void onClick(ClickEvent event) {
+			int mouseX = event.getClientX() - canvas.getAbsoluteLeft();
+			int mouseY = event.getClientY() - canvas.getAbsoluteTop();
+			
+			int centerX = context.getCanvas().getWidth()/2 -25;
+			int centerY = context.getCanvas().getHeight()/2 -25;
+			
+			if (charPosY > 0 && centerX <= mouseX && mouseX <= centerX+50 && centerY - 100 <= mouseY && mouseY <= centerY - 50) {
+				charPosY--;
+			} else if (charPosY < 3 && centerX <= mouseX && mouseX <= centerX+50 && centerY + 100 <= mouseY && mouseY <= centerY + 150) {
+				charPosY++;
+			} else if (charPosX > 0 && centerX -100 <= mouseX && mouseX <= centerX-50 && centerY <= mouseY && mouseY <= centerY + 50) {
+				charPosX--;
+			} else if (charPosX < 9 && centerX +100 <= mouseX && mouseX <= centerX +150 && centerY <= mouseY && mouseY <= centerY + 50) {
+				charPosX++;
+			}
+			draw();
+		}
+	  });
 	  
 	  canvas.addKeyDownHandler(new KeyDownHandler() {
 		  
