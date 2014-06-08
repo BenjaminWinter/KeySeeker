@@ -38,15 +38,17 @@ public class prototype implements EntryPoint {
   protected int charPosX;
   protected int charPosY;
   protected Canvas canvas;
+  protected Canvas miniMapCanvas;
   protected Context2d context;
-  protected ImageElement imageElement;
+  protected ImageElement mapImageElement;
 
   /**
    * This is the entry point method.
    */
   public void onModuleLoad() {
 	  canvas = Canvas.createIfSupported();
-	  if(canvas==null) {
+	  miniMapCanvas = Canvas.createIfSupported();
+	  if(canvas==null || miniMapCanvas==null) {
 		  RootPanel.get().add(new Label("Canvas is not supported by your browser"));
 		  return;
 	  }
@@ -57,19 +59,20 @@ public class prototype implements EntryPoint {
 	  canvas.setCoordinateSpaceHeight(600);
 	  
 	  context = canvas.getContext2d();
-	  Image image = new Image("/images/testTiles.jpg");
-	  imageElement = ImageElement.as(image.getElement());
+	  Image mapImage = new Image("/images/testTiles.jpg");
+	  mapImageElement = ImageElement.as(mapImage.getElement());
 	  
 	  charPosX = 4;
 	  charPosY = 2;
 	  
-	  image.addLoadHandler(new LoadHandler() {
+	  mapImage.addLoadHandler(new LoadHandler() {
 	        public void onLoad(LoadEvent event) {
 	            draw();
 	        }
 	  });
 	  
 	  RootPanel.get().add(canvas);
+	  RootPanel.get().add(miniMapCanvas);
 	  
 	  canvas.addKeyDownHandler(new KeyDownHandler() {
 		  
@@ -103,12 +106,13 @@ public class prototype implements EntryPoint {
 			default:
 				break;
 			}
+			
 			draw();
 		}
 	  });
 	  
-	  image.setVisible(false);
-	  RootPanel.get().add(image);
+	  mapImage.setVisible(false);
+	  RootPanel.get().add(mapImage);
 	  canvas.setFocus(true);
 	  
 //	  Timer timer = new Timer() {
@@ -123,26 +127,63 @@ public class prototype implements EntryPoint {
   
   public void draw() {
 	  
+	  drawMap();
+	  drawArrows(); 
+	  
+	  // dummy Character
+	  context.fillRect(context.getCanvas().getWidth()/2 -25, context.getCanvas().getHeight()/2 -25, 50, 50);
+	  
+	  drawMiniMap();
+  }
+  
+
+public void drawMap() {
+	  
 	  // values here are not very accurate, but its only a test
 	  double deltaX = 68 +0.5;
 	  int deltaY = 68;
-	  
-	  //Background
+		  
+	  // black Background
 	  context.fillRect(0, 0, context.getCanvas().getWidth(), context.getCanvas().getHeight());
 	  
 	  //first row
-	  context.drawImage(imageElement, (charPosX-1)*deltaX, (charPosY-1)*deltaY, 71, 71,   0, 0, 200, 200);
-	  context.drawImage(imageElement,  charPosX   *deltaX, (charPosY-1)*deltaY, 70, 70, 200, 0, 200, 200);
-	  context.drawImage(imageElement, (charPosX+1)*deltaX, (charPosY-1)*deltaY, 70, 70, 400, 0, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX-1)*deltaX, (charPosY-1)*deltaY, 71, 71,   0, 0, 200, 200);
+	  context.drawImage(mapImageElement,  charPosX   *deltaX, (charPosY-1)*deltaY, 70, 70, 200, 0, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX+1)*deltaX, (charPosY-1)*deltaY, 70, 70, 400, 0, 200, 200);
 	  //second row
-	  context.drawImage(imageElement, (charPosX-1)*deltaX, charPosY*deltaY, 71, 71,   0, 200, 200, 200);
-	  context.drawImage(imageElement,  charPosX   *deltaX, charPosY*deltaY, 70, 70, 200, 200, 200, 200);
-	  context.drawImage(imageElement, (charPosX+1)*deltaX, charPosY*deltaY, 70, 70, 400, 200, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX-1)*deltaX, charPosY*deltaY, 71, 71,   0, 200, 200, 200);
+	  context.drawImage(mapImageElement,  charPosX   *deltaX, charPosY*deltaY, 70, 70, 200, 200, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX+1)*deltaX, charPosY*deltaY, 70, 70, 400, 200, 200, 200);
 	  //third row
-	  context.drawImage(imageElement, (charPosX-1)*deltaX, (charPosY+1)*deltaY, 71, 71,   0, 400, 200, 200);
-	  context.drawImage(imageElement,  charPosX   *deltaX, (charPosY+1)*deltaY, 70, 70, 200, 400, 200, 200);
-	  context.drawImage(imageElement, (charPosX+1)*deltaX, (charPosY+1)*deltaY, 70, 70, 400, 400, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX-1)*deltaX, (charPosY+1)*deltaY, 71, 71,   0, 400, 200, 200);
+	  context.drawImage(mapImageElement,  charPosX   *deltaX, (charPosY+1)*deltaY, 70, 70, 200, 400, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX+1)*deltaX, (charPosY+1)*deltaY, 70, 70, 400, 400, 200, 200);
+  }
+  
+  public void drawArrows() {
 	  
-	  context.fillRect(context.getCanvas().getWidth()/2 -25, context.getCanvas().getHeight()/2 -25, 50, 50);
+	  ImageElement arrows = ImageElement.as(new Image("/images/testArrows.png").getElement());
+	  
+	  if(charPosX > 0) {
+		  context.drawImage(arrows, 0, 0, 200, 200, context.getCanvas().getWidth()/2 -25 -100, context.getCanvas().getHeight()/2 -25, 50, 50);
+	  }
+	  if(charPosX < 9) {
+		  context.drawImage(arrows, 400, 0, 200, 200, context.getCanvas().getWidth()/2 -25 +100, context.getCanvas().getHeight()/2 -25, 50, 50);
+	  }
+	  if(charPosY > 0) {
+		  context.drawImage(arrows, 200, 0, 200, 200, context.getCanvas().getWidth()/2 -25, context.getCanvas().getHeight()/2 -25  -100, 50, 50);
+	  }
+	  if(charPosY < 3) {
+		  context.drawImage(arrows, 600, 0, 200, 200, context.getCanvas().getWidth()/2 -25, context.getCanvas().getHeight()/2 -25  +100, 50, 50);
+	  }
+  }
+  
+  private void drawMiniMap() {
+	  Context2d miniMapCtx = miniMapCanvas.getContext2d();
+	  double xTileLenght = miniMapCtx.getCanvas().getWidth()/10 -0.7;
+	  double yTileLenght = miniMapCtx.getCanvas().getHeight()/4 -1.7;
+	  
+	  miniMapCtx.drawImage(mapImageElement, 0, 0, miniMapCtx.getCanvas().getWidth(), miniMapCtx.getCanvas().getHeight());
+	  miniMapCtx.fillRect(xTileLenght/2  -3 +charPosX*xTileLenght, yTileLenght/2+charPosY*yTileLenght - 3, 6, 6);
   }
 }
