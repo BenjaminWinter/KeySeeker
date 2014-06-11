@@ -17,9 +17,12 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -50,8 +53,6 @@ public class prototype implements EntryPoint {
   protected Context2d context;
   protected ImageElement mapImageElement;
   
-  @UiField
-  Button confirmButton;
   
   /**
    * This is the entry point method.
@@ -66,7 +67,7 @@ public class prototype implements EntryPoint {
   
 
   
-  public void onStartGame() {
+  public void onStartGame(HorizontalPanel div) {
 	  canvas = Canvas.createIfSupported();
 	  miniMapCanvas = Canvas.createIfSupported();
 	  if(canvas==null || miniMapCanvas==null) {
@@ -74,9 +75,9 @@ public class prototype implements EntryPoint {
 		  return;
 	  }
 	  
-	  canvas.setWidth("600px");
+	  canvas.setWidth("1000px");
 	  canvas.setHeight("600px");
-	  canvas.setCoordinateSpaceWidth(600);
+	  canvas.setCoordinateSpaceWidth(1000);
 	  canvas.setCoordinateSpaceHeight(600);
 	  
 	  context = canvas.getContext2d();
@@ -92,8 +93,12 @@ public class prototype implements EntryPoint {
 	        }
 	  });
 	  
-	  RootPanel.get().add(canvas);
-	  RootPanel.get().add(miniMapCanvas);
+//	  RootPanel.get().add(canvas);
+	  div.add(canvas);
+	  
+	  div.add(new StatusView());
+//	  div.add(miniMapCanvas);
+//	  RootPanel.get().add(miniMapCanvas);
 	  
 	  canvas.addClickHandler(new ClickHandler() {
 		
@@ -190,17 +195,26 @@ public void drawMap() {
 	  context.fillRect(0, 0, context.getCanvas().getWidth(), context.getCanvas().getHeight());
 	  
 	  //first row
-	  context.drawImage(mapImageElement, (charPosX-1)*deltaX, (charPosY-1)*deltaY, 71, 71,   0, 0, 200, 200);
-	  context.drawImage(mapImageElement,  charPosX   *deltaX, (charPosY-1)*deltaY, 70, 70, 200, 0, 200, 200);
-	  context.drawImage(mapImageElement, (charPosX+1)*deltaX, (charPosY-1)*deltaY, 70, 70, 400, 0, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX-2)*deltaX, (charPosY-1)*deltaY, 71, 71,   0, 0, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX-1)*deltaX, (charPosY-1)*deltaY, 70, 70, 200, 0, 200, 200);
+	  context.drawImage(mapImageElement,  charPosX   *deltaX, (charPosY-1)*deltaY, 70, 70, 400, 0, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX+1)*deltaX, (charPosY-1)*deltaY, 70, 70, 600, 0, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX+2)*deltaX, (charPosY-1)*deltaY, 70, 70, 800, 0, 200, 200);
+
 	  //second row
-	  context.drawImage(mapImageElement, (charPosX-1)*deltaX, charPosY*deltaY, 71, 71,   0, 200, 200, 200);
-	  context.drawImage(mapImageElement,  charPosX   *deltaX, charPosY*deltaY, 70, 70, 200, 200, 200, 200);
-	  context.drawImage(mapImageElement, (charPosX+1)*deltaX, charPosY*deltaY, 70, 70, 400, 200, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX-2)*deltaX, charPosY*deltaY, 71, 71,   0, 200, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX-1)*deltaX, charPosY*deltaY, 70, 70, 200, 200, 200, 200);
+	  context.drawImage(mapImageElement,  charPosX   *deltaX, charPosY*deltaY, 70, 70, 400, 200, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX+1)*deltaX, charPosY*deltaY, 70, 70, 600, 200, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX+2)*deltaX, charPosY*deltaY, 70, 70, 800, 200, 200, 200);
+
 	  //third row
-	  context.drawImage(mapImageElement, (charPosX-1)*deltaX, (charPosY+1)*deltaY, 71, 71,   0, 400, 200, 200);
-	  context.drawImage(mapImageElement,  charPosX   *deltaX, (charPosY+1)*deltaY, 70, 70, 200, 400, 200, 200);
-	  context.drawImage(mapImageElement, (charPosX+1)*deltaX, (charPosY+1)*deltaY, 70, 70, 400, 400, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX-2)*deltaX, (charPosY+1)*deltaY, 71, 71,   0, 400, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX-1)*deltaX, (charPosY+1)*deltaY, 70, 70, 200, 400, 200, 200);
+	  context.drawImage(mapImageElement,  charPosX   *deltaX, (charPosY+1)*deltaY, 70, 70, 400, 400, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX+1)*deltaX, (charPosY+1)*deltaY, 70, 70, 600, 400, 200, 200);
+	  context.drawImage(mapImageElement, (charPosX+2)*deltaX, (charPosY+1)*deltaY, 70, 70, 800, 400, 200, 200);
+
   }
   
   public void drawArrows() {

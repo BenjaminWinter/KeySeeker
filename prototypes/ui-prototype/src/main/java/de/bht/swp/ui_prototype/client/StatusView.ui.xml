@@ -1,0 +1,62 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	.important {
+		font-weight: bold;
+	}
+	.panel {
+		background-image:url("/images/StatusPanel.png");
+		<!-- background:lightgrey; -->
+		width:250px;
+		height:600px;
+	}
+	</ui:style>
+	<g:HTMLPanel styleName="{style.panel}">
+		<table align="center" style="cellspacing:50px">
+     	 <tr>
+     	   <td colspan="2" style="font-weight:bold; font-size:18px; padding-bottom:10px">"Klasse" "Name"</td>   
+     	 </tr>
+     	
+     	 <tr>
+     	 	<td style="padding-right:100px"> <g:Label> Angriff:</g:Label> </td>
+     	 	<td> <g:Label ui:field="attackValue"> 3 + x </g:Label> </td>
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Label> Runden pro Zug:</g:Label> </td>
+     	 	<td> <g:Label ui:field="movesPerTurnValue"> 1 + y </g:Label> </td>
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Label> Lebenskraft:</g:Label> </td>
+     	 	<td> <g:Label ui:field="lifeValue"> 2 + z </g:Label> </td>
+     	 </tr>
+     	 <!--  free space -->
+     	  	<tr>
+     	   <td style="font-weight:bold; font-size:18px; padding-top:50px">Inventar:</td>   
+     	 </tr>
+     	 <tr>
+     	 	<td> 
+				<g:ListBox ui:field="inventoryList" visibleItemCount="3" width="150px">
+  					<g:item>
+    					Gegenstand1
+  					</g:item>
+  					<g:item value='2'>
+    					Gegenstand2
+  					</g:item>
+  					<g:item value='3'>
+    					Gegenstand3
+  					</g:item>
+ 
+ 				</g:ListBox>
+			</td>
+     	 	
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Button> Gegenstand verwenden</g:Button> </td>
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Button> Gegenstand wegwerfen</g:Button> </td>
+     	 </tr>
+    	</table>
+	</g:HTMLPanel>
+</ui:UiBinder> 

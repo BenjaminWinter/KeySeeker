@@ -1,5 +1,6 @@
 package de.bht.swp.ui_prototype.client;
 
+import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Style.Display;
@@ -13,8 +14,11 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class InputPanel extends Composite {
@@ -27,6 +31,8 @@ public class InputPanel extends Composite {
 	DivElement loginDiv;
 	@UiField
 	DivElement characterCreationDiv;
+	@UiField
+	HorizontalPanel gameDiv;
 	@UiField
 	ListBox classListBox;
 	@UiField
@@ -67,6 +73,8 @@ public class InputPanel extends Composite {
 //				Window.alert(selectedClass);
 			}
 		});
+//		loginDiv.getStyle().setDisplay(Display.NONE);
+//		proto.onStartGame(gameDiv);
 	}
 	
 	  @UiHandler("loginButton")
@@ -78,6 +86,7 @@ public class InputPanel extends Composite {
 	  @UiHandler("confirmButton")
 	  void onConfirm(ClickEvent e) {
 		  characterCreationDiv.getStyle().setDisplay(Display.NONE);
-		  proto.onStartGame();
+		  proto.onStartGame(gameDiv);
+		  proto.draw();
 	  }
 }
