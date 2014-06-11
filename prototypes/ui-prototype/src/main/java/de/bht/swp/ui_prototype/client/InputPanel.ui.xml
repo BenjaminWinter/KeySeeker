@@ -1,0 +1,95 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel >
+	<!--  
+			<g:VerticalPanel style="margin:50px">
+				<g:Label> Hello World</g:Label>
+				<g:Button ui:field="testButton"> TEST </g:Button>
+			</g:VerticalPanel>
+	-->
+	<div style="background-image:url(/images/KeySeekerLogo.png); margin:30px; padding:100px; background-size: 20%; background-position: 50% 0%; background-repeat:no-repeat"> </div>
+	<div ui:field="loginDiv">
+		<table align="center">
+     	 <tr>
+     	   <td colspan="2" style="font-weight:bold; font-size:18px">Anmeldung:</td>   
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Label> Anmeldename:</g:Label> </td>
+     	 	<td> <g:TextBox> </g:TextBox> </td>
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Label> Password:</g:Label> </td>
+     	 	<td> <g:PasswordTextBox> </g:PasswordTextBox> </td>
+     	 </tr>
+     	 <tr>
+     	 <td></td>
+     	 	<td>
+     	 		<g:Button ui:field="loginButton"> Anmelden </g:Button>
+     	 	</td>
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Hyperlink> Registrieren</g:Hyperlink> </td>
+     	 </tr>
+    	</table>
+	</div>
+	
+	<div ui:field="characterCreationDiv" style="display:none">
+		<table align="center">
+     	 <tr>
+     	   <td colspan="2" style="font-weight:bold; font-size:18px">Charaktererstellung:</td>   
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Label> Charaktername:</g:Label> </td>
+     	 	<td> <g:TextBox> </g:TextBox> </td>
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Label> Klasse:</g:Label> </td>
+     	 	<td> <g:ListBox ui:field="classListBox">
+     	 			<g:item> Krieger </g:item> 
+     	 			<g:item> Jäger </g:item> 
+     	 			<g:item> Magier </g:item> 
+     	 		 </g:ListBox> 
+     	 	</td>
+     	 </tr>
+     	 <tr>
+     	 <td></td>
+     	 	<td>
+     	 	<!-- <g:Button ui:field="confirmButton"> Bestätigen </g:Button>  -->	
+     	 	</td>
+     	 </tr>
+    	
+     	 <tr>
+     	   <td style="font-weight:bold; font-size:18px">Standartwerte:</td>   
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Label> Angriff:</g:Label> </td>
+     	 	<td> <g:Label ui:field="attackValue"> 3 </g:Label> </td>
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Label> Runden pro Zug:</g:Label> </td>
+     	 	<td> <g:Label ui:field="movesPerTurnValue"> 1 </g:Label> </td>
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Label> Lebenskraft:</g:Label> </td>
+     	 	<td> <g:Label ui:field="lifeValue"> 2 </g:Label> </td>
+     	 </tr>
+     	 <!--  free space -->
+     	 <tr></tr>
+     	 <tr></tr>
+     	 <tr></tr>
+     	 
+     	 <tr>
+     	 <td></td>
+     	 	<td>
+     	 		<g:Button ui:field="confirmButton"> Beginnen </g:Button>
+     	 	</td>
+     	 </tr>
+    	</table>
+	</div>
+    	
+	</g:HTMLPanel>
+</ui:UiBinder> 

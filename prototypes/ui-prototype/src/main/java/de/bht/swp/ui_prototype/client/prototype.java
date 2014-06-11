@@ -4,6 +4,7 @@ import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -12,6 +13,10 @@ import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.event.dom.client.LoadHandler;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -44,11 +49,24 @@ public class prototype implements EntryPoint {
   protected Canvas miniMapCanvas;
   protected Context2d context;
   protected ImageElement mapImageElement;
-
+  
+  @UiField
+  Button confirmButton;
+  
   /**
    * This is the entry point method.
    */
   public void onModuleLoad() {
+	  InputPanel ip = new InputPanel();
+	  RootPanel.get().add(ip);
+	  
+//	  ip.testButton.setText("funkt");
+	  
+  }
+  
+
+  
+  public void onStartGame() {
 	  canvas = Canvas.createIfSupported();
 	  miniMapCanvas = Canvas.createIfSupported();
 	  if(canvas==null || miniMapCanvas==null) {
