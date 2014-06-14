@@ -200,7 +200,7 @@ public void drawMap() {
 	  context.drawImage(mapImageElement,  charPosX   *deltaX, (charPosY-1)*deltaY, 70, 70, 400, 0, 200, 200);
 	  context.drawImage(mapImageElement, (charPosX+1)*deltaX, (charPosY-1)*deltaY, 70, 70, 600, 0, 200, 200);
 	  context.drawImage(mapImageElement, (charPosX+2)*deltaX, (charPosY-1)*deltaY, 70, 70, 800, 0, 200, 200);
-
+	  
 	  //second row
 	  context.drawImage(mapImageElement, (charPosX-2)*deltaX, charPosY*deltaY, 71, 71,   0, 200, 200, 200);
 	  context.drawImage(mapImageElement, (charPosX-1)*deltaX, charPosY*deltaY, 70, 70, 200, 200, 200, 200);
