@@ -1,4 +1,4 @@
-package courses.hibernate.vo;
+package de.bht.swp.ui_prototype.client.hibernate.Mapping;
 
 import java.util.Date;
 

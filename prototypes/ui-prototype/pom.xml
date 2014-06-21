@@ -52,6 +52,34 @@
       <classifier>sources</classifier>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.10</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate</artifactId>
+      <version>3.2.6.ga</version>
+    </dependency>
+    <!--  seems to create some issues. dont know if needed tough -->
+<!--   <dependency>
+    <groupId>org.apache.struts</groupId>
+    <artifactId>struts2-core</artifactId>
+    <version>2.3.15.2</version>
+	</dependency> -->
+	<!--  in plugin -->
+	   <dependency> 
+          <groupId>org.hibernate</groupId> 
+          <artifactId>hibernate-annotations</artifactId> 
+          <version>3.3.1.GA</version> 
+    </dependency> 
+    
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>3.6.0.Final</version>
+    </dependency>
   </dependencies>
 
   <build>

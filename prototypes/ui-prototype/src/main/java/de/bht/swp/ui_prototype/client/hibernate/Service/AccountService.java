@@ -1,7 +1,8 @@
-package courses.hibernate.service;
+package de.bht.swp.ui_prototype.client.hibernate.Service;
 
-import courses.hibernate.dao.AccountDAO;
-import courses.hibernate.vo.Account;
+import de.bht.swp.ui_prototype.client.hibernate.Mapping.Account;
+import de.bht.swp.ui_prototype.client.hibernate.dao.AccountDAO;
+
 
 /**
  * Service layer for Account

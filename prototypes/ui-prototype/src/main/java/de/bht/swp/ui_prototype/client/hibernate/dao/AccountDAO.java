@@ -1,9 +1,9 @@
-package courses.hibernate.dao;
+package de.bht.swp.ui_prototype.client.hibernate.dao;
 
 import org.hibernate.Session;
 
-import courses.hibernate.util.HibernateUtil;
-import courses.hibernate.vo.Account;
+import de.bht.swp.ui_prototype.client.hibernate.Mapping.Account;
+import de.bht.swp.ui_prototype.client.hibernate.Util.HibernateUtil;
 
 /**
  * Data Access Object for Account
