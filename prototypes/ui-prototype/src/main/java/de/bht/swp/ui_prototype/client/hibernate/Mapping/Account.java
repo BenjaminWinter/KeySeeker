@@ -1,8 +1,15 @@
 package de.bht.swp.ui_prototype.client.hibernate.Mapping;
 
-import java.util.Date;
 
-import javax.persistence.*;
+
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Entity;
+import org.hibernate.annotations.ForeignKey;
 
 /**
  * Domain object representing an Account
@@ -10,21 +17,22 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ACCOUNT")
 public class Account {
-	public static final String ACCOUNT_TYPE_SAVINGS = "SAVINGS";
-	public static final String ACCOUNT_TYPE_CHECKING = "CHECKING";
 	
 	@Id @GeneratedValue
 	@Column(name = "ACCOUNT_ID")
 	private long accountId;
 	
-	@Column(name = "ACCOUNT_TYPE")
-	private String accountType;
+	@Column(name = "NAME")
+	private String name;
+
+	@Column(name = "EMAIL")
+	private String email;
 	
-	@Column(name = "CREATION_DATE")
-	private Date creationDate;
+	@Column(name = "PASSWORD")
+	private String password;
 	
-	@Column(name = "BALANCE")
-	private double balance;
+	@ForeignKey(name = "CHARACTER_ID")
+	private Hero character;
 	
 	public Account(){}
 	/**
@@ -47,119 +55,64 @@ public class Account {
 	}
 
 	/**
-	 * Get accountType
+	 * Get accountName
 	 * 
-	 * @return accountType
+	 * @return accountName
 	 */
-	public String getAccountType() {
-		return accountType;
+	public String getAccountName() {
+		return name;
 	}
 
 	/**
-	 * Set accountType
+	 * Set accountNem
 	 * 
-	 * @param accountType
+	 * @param accountName
 	 */
-	public void setAccountType(String accountType) {
-		this.accountType = accountType;
+	public void setAccountName(String name) {
+		this.name = name;
 	}
 
 	/**
-	 * Get creationDate
+	 * Get email
 	 * 
-	 * @return creationDate
+	 * @return email
 	 */
-	public Date getCreationDate() {
-		return creationDate;
+	public String getEmail() {
+		return email;
 	}
 
 	/**
-	 * Set creationDate
+	 * Set email
 	 * 
-	 * @param creationDate
+	 * @param email
 	 */
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	/**
-	 * Get balance
+	 * Get password
 	 * 
-	 * @return balance
+	 * @return password
 	 */
-	public double getBalance() {
-		return balance;
+	public String getPassword() {
+		return password;
 	}
 
 	/**
-	 * Set balance
+	 * Set password
 	 * 
-	 * @param balance
+	 * @param password
 	 */
-	public void setBalance(double balance) {
-		this.balance = balance;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuffer sb = new StringBuffer(512);
-		sb.append("\n----ACCOUNT----\n");
-		sb.append("accountId=" + accountId + "\n");
-		sb.append("accountType=" + accountType + "\n");
-		sb.append("creationDate=" + creationDate + "\n");
-		sb.append("balance=" + balance + "\n");
-		sb.append("----ACCOUNT----\n");
-		return sb.toString();
+	
+	public void setHero(Hero character){
+		this.character = character;
 	}
-
-	/**
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (accountId ^ (accountId >>> 32));
-		result = prime * result
-				+ ((accountType == null) ? 0 : accountType.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(balance);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result
-				+ ((creationDate == null) ? 0 : creationDate.hashCode());
-		return result;
+	public Hero getHero() {
+		return this.character;
 	}
-
-	/**
-	 * @see java.lang.Object#equals(Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Account))
-			return false;
-		Account other = (Account) obj;
-		if (accountId != other.accountId)
-			return false;
-		if (accountType == null) {
-			if (other.accountType != null)
-				return false;
-		} else if (!accountType.equals(other.accountType))
-			return false;
-		if (Double.doubleToLongBits(balance) != Double
-				.doubleToLongBits(other.balance))
-			return false;
-		if (creationDate == null) {
-			if (other.creationDate != null)
-				return false;
-		} else if (!creationDate.equals(other.creationDate))
-			return false;
-		return true;
-	}
+	
 }
