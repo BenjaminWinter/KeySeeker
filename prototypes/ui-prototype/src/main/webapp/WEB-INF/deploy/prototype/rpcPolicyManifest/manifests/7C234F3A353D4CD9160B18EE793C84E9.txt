@@ -1,0 +1,2 @@
+serviceClass: de.bht.swp.ui_prototype.client.GreetingService
+path: 7C3B3D335D00B2D57D694096EE24D84C.gwt.rpc
