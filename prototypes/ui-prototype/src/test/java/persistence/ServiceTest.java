@@ -1,11 +1,15 @@
 package persistence;
 
-import java.util.Date;
+import java.io.File;
 
 import org.hibernate.Session;
 
+import de.bht.swp.ui_prototype.client.hibernate.Mapping.Ability;
 import de.bht.swp.ui_prototype.client.hibernate.Mapping.Account;
+import de.bht.swp.ui_prototype.client.hibernate.Mapping.Hero;
+import de.bht.swp.ui_prototype.client.hibernate.Mapping.Image;
 import de.bht.swp.ui_prototype.client.hibernate.Service.AccountService;
+import de.bht.swp.ui_prototype.client.hibernate.Service.HeroService;
 import de.bht.swp.ui_prototype.client.hibernate.Util.HibernateUtil;
 
 
@@ -19,9 +23,9 @@ public abstract class ServiceTest {
 	 */
 	protected Account buildAccount() {
 		Account account = new Account();
-		account.setAccountType(Account.ACCOUNT_TYPE_SAVINGS);
-		account.setCreationDate(new Date());
-		account.setBalance(1000L);
+		account.setAccountName("test");
+		account.setEmail("test@test.com");
+		account.setPassword("1234");
 		return account;
 	}
 

@@ -4,12 +4,14 @@ package de.bht.swp.ui_prototype.client.hibernate.Mapping;
 
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Entity;
-import org.hibernate.annotations.ForeignKey;
+
+//import org.hibernate.annotations.Entity;
+//import org.hibernate.annotations.ForeignKey;
 
 /**
  * Domain object representing an Account
@@ -30,9 +32,6 @@ public class Account {
 	
 	@Column(name = "PASSWORD")
 	private String password;
-	
-	@ForeignKey(name = "CHARACTER_ID")
-	private Hero character;
 	
 	public Account(){}
 	/**
@@ -106,13 +105,6 @@ public class Account {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	
-	public void setHero(Hero character){
-		this.character = character;
-	}
-	public Hero getHero() {
-		return this.character;
 	}
 	
 }

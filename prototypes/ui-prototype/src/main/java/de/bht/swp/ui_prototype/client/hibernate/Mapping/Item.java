@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ForeignKey;
@@ -19,7 +21,8 @@ public class Item {
 	@Column(name = "NAME")
 	private String name;
 	
-	@ForeignKey(name = "ABILITY_ID")
+	@OneToOne
+	@JoinColumn(name = "ABILITY_ID")
 	private Ability ability;
 
 	public long getItemId() {

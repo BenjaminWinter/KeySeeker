@@ -4,16 +4,10 @@
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<!-- Derby Configuration -->
-		<!-- 
-		<property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
-		<property name="hibernate.connection.url">jdbc:derby://localhost:1527/LECTURE2</property>
-		<property name="dialect">org.hibernate.dialect.DerbyDialect</property>
- 		-->
  		
 		<!-- MySQL Configuration -->
 	 	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/TestDB</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/KeySeekerDB</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">1234</property>		
    		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
@@ -30,5 +24,9 @@
 
 		<!--  Load all mapping files -->
 		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Account" />
+		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Hero" />
+		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Ability" />
+		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Image" />
+		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Item" />
 	</session-factory>
 </hibernate-configuration>

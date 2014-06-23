@@ -1,7 +1,5 @@
 package persistence;
 
-import java.util.Date;
-
 import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,8 +7,6 @@ import org.junit.Test;
 import de.bht.swp.ui_prototype.client.hibernate.Mapping.Account;
 import de.bht.swp.ui_prototype.client.hibernate.Service.AccountService;
 import de.bht.swp.ui_prototype.client.hibernate.Util.HibernateUtil;
-
-
 
 /**
  * Service layer tests for Account
@@ -33,9 +29,9 @@ public class AccountServiceTest extends ServiceTest {
 		// -- ---- -- --- --- --------- ---- -- --- --
 		// account.setAccountId(1)
 
-		account.setAccountType(Account.ACCOUNT_TYPE_SAVINGS);
-		account.setCreationDate(new Date());
-		account.setBalance(1000L);
+		account.setAccountName("newtester");
+		account.setEmail("new@testemail.de");
+		account.setPassword("1111");
 
 		Assert.assertTrue(account.getAccountId() == 0);
 
@@ -96,15 +92,15 @@ public class AccountServiceTest extends ServiceTest {
 	 * Test updating of account balance
 	 */
 	@Test
-	public void testUpdateAccountBalance() {
+	public void testUpdateAccountName() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 
 		Account account = createAccount();
-		System.out.println("var account = " + account);
+		System.out.println("var account = " + account.getAccountName());
 
 		AccountService accountService = new AccountService();
-		account.setBalance(2000);
+		account.setAccountName("tester42");
 		accountService.saveOrUpdateAccount(account);
 		session.getTransaction().commit();
 		HibernateUtil.getSessionFactory().close();
@@ -114,12 +110,12 @@ public class AccountServiceTest extends ServiceTest {
 		session2.beginTransaction();
 
 		Account anotherCopy = accountService.getAccount(account.getAccountId());
-		System.out.println("var anotherCopy = " + anotherCopy);
+		System.out.println("var anotherCopy = " + anotherCopy.getAccountName());
 
 		// make sure the one we just pulled back
 		// from the database has the updated balance
 		// -----------------------------------------
-		Assert.assertTrue(anotherCopy.getBalance() == 2000);
+		Assert.assertTrue(anotherCopy.getAccountName().equals("tester42"));
 
 		session2.getTransaction().commit();
 		HibernateUtil.getSessionFactory().close();
@@ -134,7 +130,7 @@ public class AccountServiceTest extends ServiceTest {
 	 * Hibernate Mapping. Therefore, ensure that it does not get updated.
 	 */
 	@Test
-	public void testUpdateAccountType() {
+	public void testUpdateAccountPassword() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 
@@ -142,7 +138,7 @@ public class AccountServiceTest extends ServiceTest {
 		System.out.println("var account = " + account);
 
 		AccountService accountService = new AccountService();
-		account.setAccountType(Account.ACCOUNT_TYPE_CHECKING);
+		account.setPassword("1111");
 		accountService.saveOrUpdateAccount(account);
 		session.getTransaction().commit();
 		HibernateUtil.getSessionFactory().close();
@@ -157,8 +153,7 @@ public class AccountServiceTest extends ServiceTest {
 		// make sure the one we just pulled back from
 		// the database does have the updated balance
 		// ----------------------------------------------
-		Assert.assertTrue(anotherCopy.getAccountType().equals(
-				Account.ACCOUNT_TYPE_CHECKING));
+		Assert.assertTrue(anotherCopy.getPassword().equals("1111"));
 
 		session2.getTransaction().commit();
 		HibernateUtil.getSessionFactory().close();

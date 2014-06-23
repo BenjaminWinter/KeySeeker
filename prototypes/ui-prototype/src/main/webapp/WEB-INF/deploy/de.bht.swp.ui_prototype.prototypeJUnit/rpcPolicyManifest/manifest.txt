@@ -1,0 +1,2 @@
+# Module de.bht.swp.ui_prototype.prototypeJUnit
+# RPC service class, partial path of RPC policy file

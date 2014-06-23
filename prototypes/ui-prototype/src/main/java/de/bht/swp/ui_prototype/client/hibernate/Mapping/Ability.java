@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Ability")
+@Table(name="ABILITY")
 public class Ability {
 	
 	@Id @GeneratedValue

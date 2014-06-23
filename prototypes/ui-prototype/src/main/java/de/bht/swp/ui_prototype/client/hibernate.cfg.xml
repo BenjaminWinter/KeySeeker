@@ -30,5 +30,9 @@
 
 		<!--  Load all mapping files -->
 		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Account" />
+		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Hero" />
+		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Ability" />
+		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Image" />
+		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Item" />
 	</session-factory>
 </hibernate-configuration>

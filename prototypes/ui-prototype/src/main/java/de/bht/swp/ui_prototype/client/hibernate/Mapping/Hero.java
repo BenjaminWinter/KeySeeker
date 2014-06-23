@@ -4,8 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.ForeignKey;
 
 /**
@@ -23,11 +29,19 @@ public class Hero {
 	@Column(name = "NAME")
 	private String name;
 	
-	@ForeignKey(name = "IMAGE_ID")
+	@OneToOne
+	@Cascade({CascadeType.SAVE_UPDATE})
+	@JoinColumn(name = "IMAGE_ID")
 	private Image image;
 	
-	@ForeignKey(name = "ABILITY_ID")
+	@OneToOne
+	@Cascade({CascadeType.SAVE_UPDATE})
+	@JoinColumn(name = "ABILITY_ID")
 	private Ability ability;
+	
+	@ManyToOne
+	@JoinColumn(name = "ACCOUNT_ID")
+	private Account account;
 
 	public long getCharacterId() {
 		return characterId;
@@ -59,6 +73,14 @@ public class Hero {
 
 	public void setAbility(Ability ability) {
 		this.ability = ability;
+	}
+	
+	public Account getAccount() {
+		return account;
+	}
+	
+	public void setAccount(Account account){
+		this.account = account;
 	}
 
 	@Override
