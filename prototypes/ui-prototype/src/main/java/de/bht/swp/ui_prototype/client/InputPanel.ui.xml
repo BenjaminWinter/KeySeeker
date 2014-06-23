@@ -21,11 +21,11 @@
      	 </tr>
      	 <tr>
      	 	<td> <g:Label> Anmeldename:</g:Label> </td>
-     	 	<td> <g:TextBox> </g:TextBox> </td>
+     	 	<td> <g:TextBox ui:field="loginNameTextBox"> </g:TextBox> </td>
      	 </tr>
      	 <tr>
      	 	<td> <g:Label> Password:</g:Label> </td>
-     	 	<td> <g:PasswordTextBox> </g:PasswordTextBox> </td>
+     	 	<td> <g:PasswordTextBox ui:field="loginPasswordTextBox"> </g:PasswordTextBox> </td>
      	 </tr>
      	 <tr>
      	 <td></td>

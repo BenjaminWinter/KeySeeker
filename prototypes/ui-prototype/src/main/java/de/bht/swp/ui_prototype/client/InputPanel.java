@@ -1,10 +1,8 @@
 package de.bht.swp.ui_prototype.client;
 
-import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Style.Display;
-import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,12 +15,16 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class InputPanel extends Composite {
-
+	
+	@UiField
+	TextBox loginNameTextBox;
+	@UiField
+	PasswordTextBox loginPasswordTextBox;
 	@UiField
 	Button loginButton;
 	@UiField
@@ -79,8 +81,18 @@ public class InputPanel extends Composite {
 	
 	  @UiHandler("loginButton")
 	  void onLogin(ClickEvent e) {
-		  loginDiv.getStyle().setDisplay(Display.NONE);
-		  characterCreationDiv.getStyle().setDisplay(Display.BLOCK);
+		  String loginName = loginNameTextBox.getText();
+		  String loginPassword = loginNameTextBox.getText();
+		  
+		  //Todo: ask the database here
+		  boolean validLogin = true;
+		  
+		  if(validLogin) {
+			  loginDiv.getStyle().setDisplay(Display.NONE);
+			  characterCreationDiv.getStyle().setDisplay(Display.BLOCK);
+		  } else {
+			  Window.alert("Wrong Name or Password!");
+		  }
 	  }
 	  
 	  @UiHandler("confirmButton")
