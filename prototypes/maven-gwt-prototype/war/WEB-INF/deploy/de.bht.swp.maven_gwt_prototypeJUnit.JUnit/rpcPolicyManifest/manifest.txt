@@ -1,2 +1,0 @@
-# Module de.bht.swp.maven_gwt_prototypeJUnit.JUnit
-# RPC service class, partial path of RPC policy file

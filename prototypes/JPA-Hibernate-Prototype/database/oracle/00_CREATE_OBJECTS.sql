@@ -1,3 +1,0 @@
-@01_ACCOUNT.sql
-
-@02_SEQUENCES.sql

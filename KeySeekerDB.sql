@@ -1,122 +1,104 @@
--- phpMyAdmin SQL Dump
--- version 4.1.12
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Jun 23, 2014 at 12:13 PM
--- Server version: 5.6.16
--- PHP Version: 5.5.11
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+DROP SCHEMA IF EXISTS `KeySeekerDB` ;
+CREATE SCHEMA IF NOT EXISTS `KeySeekerDB` DEFAULT CHARACTER SET latin1 COLLATE latin1_german1_ci ;
+USE `KeySeekerDB` ;
+
+-- -----------------------------------------------------
+-- Table `KeySeekerDB`.`ACCOUNT`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `KeySeekerDB`.`ACCOUNT` ;
+
+CREATE  TABLE IF NOT EXISTS `KeySeekerDB`.`ACCOUNT` (
+  `ACCOUNT_ID` INT NOT NULL AUTO_INCREMENT ,
+  `NAME` VARCHAR(45) NOT NULL ,
+  `PASSWORD` VARCHAR(45) NOT NULL ,
+  `EMAIL` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`ACCOUNT_ID`) )
+ENGINE = InnoDB;
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+-- -----------------------------------------------------
+-- Table `KeySeekerDB`.`IMAGE`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `KeySeekerDB`.`IMAGE` ;
 
---
--- Database: `KeySeekerDB`
---
+CREATE  TABLE IF NOT EXISTS `KeySeekerDB`.`IMAGE` (
+  `IMAGE_ID` INT NOT NULL AUTO_INCREMENT ,
+  `PATH` VARCHAR(90) NOT NULL ,
+  PRIMARY KEY (`IMAGE_ID`) )
+ENGINE = InnoDB;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `ABILITY`
---
+-- -----------------------------------------------------
+-- Table `KeySeekerDB`.`ABILITY`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `KeySeekerDB`.`ABILITY` ;
 
-CREATE TABLE IF NOT EXISTS `ABILITY` (
-  `ABILITY_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `MOVESPERTURN` int(11) NOT NULL,
-  `ATTACK` int(11) NOT NULL,
-  `LIFE` int(11) NOT NULL,
-  PRIMARY KEY (`ABILITY_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci AUTO_INCREMENT=1 ;
+CREATE  TABLE IF NOT EXISTS `KeySeekerDB`.`ABILITY` (
+  `ABILITY_ID` INT NOT NULL AUTO_INCREMENT ,
+  `MOVESPERTURN` INT NOT NULL ,
+  `ATTACK` INT NOT NULL ,
+  `LIFE` INT NOT NULL ,
+  PRIMARY KEY (`ABILITY_ID`) )
+ENGINE = InnoDB;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `ACCOUNT`
---
+-- -----------------------------------------------------
+-- Table `KeySeekerDB`.`CHARACTER`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `KeySeekerDB`.`CHARACTER` ;
 
-CREATE TABLE IF NOT EXISTS `ACCOUNT` (
-  `ACCOUNT_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `NAME` varchar(45) COLLATE latin1_german1_ci NOT NULL,
-  `PASSWORD` varchar(45) COLLATE latin1_german1_ci NOT NULL,
-  `EMAIL` varchar(45) COLLATE latin1_german1_ci NOT NULL,
-  PRIMARY KEY (`ACCOUNT_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci AUTO_INCREMENT=2 ;
+CREATE  TABLE IF NOT EXISTS `KeySeekerDB`.`CHARACTER` (
+  `CHARACTER_ID` INT NOT NULL ,
+  `NAME` VARCHAR(45) NOT NULL ,
+  `IMAGE_ID` INT NULL ,
+  `ABILITY_ID` INT NOT NULL ,
+  `ACCOUNT_ID` INT NOT NULL ,
+  PRIMARY KEY (`CHARACTER_ID`) ,
+  INDEX `fk_Character_Image1` (`IMAGE_ID` ASC) ,
+  INDEX `fk_Character_Ability1` (`ABILITY_ID` ASC) ,
+  INDEX `fk_Character_Account1` (`ACCOUNT_ID` ASC) ,
+  CONSTRAINT `fk_Character_Image1`
+    FOREIGN KEY (`IMAGE_ID` )
+    REFERENCES `KeySeekerDB`.`IMAGE` (`IMAGE_ID` )
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_Character_Ability1`
+    FOREIGN KEY (`ABILITY_ID` )
+    REFERENCES `KeySeekerDB`.`ABILITY` (`ABILITY_ID` )
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Character_Account1`
+    FOREIGN KEY (`ACCOUNT_ID` )
+    REFERENCES `KeySeekerDB`.`ACCOUNT` (`ACCOUNT_ID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
---
--- Dumping data for table `ACCOUNT`
---
 
-INSERT INTO `ACCOUNT` (`ACCOUNT_ID`, `NAME`, `PASSWORD`, `EMAIL`) VALUES
-(1, 'admin', '1234', 'Benny.Winter@yahoo.de');
+-- -----------------------------------------------------
+-- Table `KeySeekerDB`.`ITEM`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `KeySeekerDB`.`ITEM` ;
 
--- --------------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `KeySeekerDB`.`ITEM` (
+  `ITEM_ID` INT NOT NULL AUTO_INCREMENT ,
+  `NAME` VARCHAR(45) NOT NULL ,
+  `ABILITY_ID` INT NOT NULL ,
+  PRIMARY KEY (`ITEM_ID`) ,
+  INDEX `fk_Item_Ability1` (`ABILITY_ID` ASC) ,
+  CONSTRAINT `fk_Item_Ability1`
+    FOREIGN KEY (`ABILITY_ID` )
+    REFERENCES `KeySeekerDB`.`ABILITY` (`ABILITY_ID` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
 
---
--- Table structure for table `CHARACTER`
---
 
-CREATE TABLE IF NOT EXISTS `CHARACTER` (
-  `CHARACTER_ID` int(11) NOT NULL,
-  `NAME` varchar(45) COLLATE latin1_german1_ci NOT NULL,
-  `IMAGE_ID` int(11) DEFAULT NULL,
-  `ABILITY_ID` int(11) NOT NULL,
-  `ACCOUNT_ID` int(11) NOT NULL,
-  PRIMARY KEY (`CHARACTER_ID`),
-  KEY `fk_Character_Image1` (`IMAGE_ID`),
-  KEY `fk_Character_Ability1` (`ABILITY_ID`),
-  KEY `fk_Character_Account1` (`ACCOUNT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `IMAGE`
---
-
-CREATE TABLE IF NOT EXISTS `IMAGE` (
-  `IMAGE_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `PATH` varchar(90) COLLATE latin1_german1_ci NOT NULL,
-  PRIMARY KEY (`IMAGE_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ITEM`
---
-
-CREATE TABLE IF NOT EXISTS `ITEM` (
-  `ITEM_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `NAME` varchar(45) COLLATE latin1_german1_ci NOT NULL,
-  `ABILITY_ID` int(11) NOT NULL,
-  PRIMARY KEY (`ITEM_ID`),
-  KEY `fk_Item_Ability1` (`ABILITY_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci AUTO_INCREMENT=1 ;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `CHARACTER`
---
-ALTER TABLE `CHARACTER`
-  ADD CONSTRAINT `fk_Character_Image1` FOREIGN KEY (`IMAGE_ID`) REFERENCES `IMAGE` (`IMAGE_ID`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Character_Ability1` FOREIGN KEY (`ABILITY_ID`) REFERENCES `ABILITY` (`ABILITY_ID`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Character_Account1` FOREIGN KEY (`ACCOUNT_ID`) REFERENCES `ACCOUNT` (`ACCOUNT_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `ITEM`
---
-ALTER TABLE `ITEM`
-  ADD CONSTRAINT `fk_Item_Ability1` FOREIGN KEY (`ABILITY_ID`) REFERENCES `ABILITY` (`ABILITY_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
