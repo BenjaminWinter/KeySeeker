@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Test;
 
-import de.bht.swp.ui_prototype.client.hibernate.Mapping.Account;
+import de.bht.swp.ui_prototype.client.hibernate.Model.Account;
 import de.bht.swp.ui_prototype.client.hibernate.Service.AccountService;
 import de.bht.swp.ui_prototype.client.hibernate.Util.HibernateUtil;
 

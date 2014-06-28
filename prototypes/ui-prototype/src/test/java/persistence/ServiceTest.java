@@ -4,10 +4,10 @@ import java.io.File;
 
 import org.hibernate.Session;
 
-import de.bht.swp.ui_prototype.client.hibernate.Mapping.Ability;
-import de.bht.swp.ui_prototype.client.hibernate.Mapping.Account;
-import de.bht.swp.ui_prototype.client.hibernate.Mapping.Hero;
-import de.bht.swp.ui_prototype.client.hibernate.Mapping.Image;
+import de.bht.swp.ui_prototype.client.hibernate.Model.Ability;
+import de.bht.swp.ui_prototype.client.hibernate.Model.Account;
+import de.bht.swp.ui_prototype.client.hibernate.Model.Hero;
+import de.bht.swp.ui_prototype.client.hibernate.Model.Image;
 import de.bht.swp.ui_prototype.client.hibernate.Service.AccountService;
 import de.bht.swp.ui_prototype.client.hibernate.Service.HeroService;
 import de.bht.swp.ui_prototype.client.hibernate.Util.HibernateUtil;

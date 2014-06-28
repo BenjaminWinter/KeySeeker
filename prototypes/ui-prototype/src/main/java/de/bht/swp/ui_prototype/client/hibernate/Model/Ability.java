@@ -1,4 +1,4 @@
-package de.bht.swp.ui_prototype.client.hibernate.Mapping;
+package de.bht.swp.ui_prototype.client.hibernate.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,24 +11,23 @@ import javax.persistence.Table;
 public class Ability {
 	
 	@Id @GeneratedValue
-	@Column(name = "ABILITY_ID")
-	private long AbilityId;
+
+	private long id;
 	
-	@Column(name = "MOVESPERTURN")
+
 	private int movesperturn;
 	
-	@Column(name = "ATTACK")
+
 	private int attack;
 	
-	@Column(name = "LIFE")
 	private int life;
 
 	public long getAbilityId() {
-		return AbilityId;
+		return id;
 	}
 
 	public void setAbilityId(long abilityId) {
-		AbilityId = abilityId;
+		id = abilityId;
 	}
 
 	public int getMovesperturn() {
@@ -57,7 +56,7 @@ public class Ability {
 
 	@Override
 	public String toString() {
-		return "Ability [AbilityId=" + AbilityId + ", movesperturn="
+		return "Ability [AbilityId=" + id + ", movesperturn="
 				+ movesperturn + ", attack=" + attack + ", life=" + life + "]";
 	}
 
@@ -65,7 +64,7 @@ public class Ability {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (AbilityId ^ (AbilityId >>> 32));
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + attack;
 		result = prime * result + life;
 		result = prime * result + movesperturn;
@@ -81,7 +80,7 @@ public class Ability {
 		if (getClass() != obj.getClass())
 			return false;
 		Ability other = (Ability) obj;
-		if (AbilityId != other.AbilityId)
+		if (id != other.id)
 			return false;
 		if (attack != other.attack)
 			return false;

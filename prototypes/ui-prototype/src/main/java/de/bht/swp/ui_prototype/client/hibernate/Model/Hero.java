@@ -1,4 +1,4 @@
-package de.bht.swp.ui_prototype.client.hibernate.Mapping;
+package de.bht.swp.ui_prototype.client.hibernate.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,10 +23,8 @@ import org.hibernate.annotations.ForeignKey;
 public class Hero {
 	
 	@Id @GeneratedValue
-	@Column(name = "CHARACTER_ID")
-	private long characterId;
+	private long id;
 	
-	@Column(name = "NAME")
 	private String name;
 	
 	@OneToOne
@@ -44,11 +42,11 @@ public class Hero {
 	private Account account;
 
 	public long getCharacterId() {
-		return characterId;
+		return id;
 	}
 
 	public void setCharacterId(long characterId) {
-		this.characterId = characterId;
+		this.id = characterId;
 	}
 
 	public String getName() {
@@ -85,7 +83,7 @@ public class Hero {
 
 	@Override
 	public String toString() {
-		return "Hero [characterId=" + characterId + ", name=" + name
+		return "Hero [characterId=" + id + ", name=" + name
 				+ ", image=" + image + ", ability=" + ability + "]";
 	}
 	

@@ -1,4 +1,4 @@
-package de.bht.swp.ui_prototype.client.hibernate.Mapping;
+package de.bht.swp.ui_prototype.client.hibernate.Model;
 
 
 
@@ -21,16 +21,12 @@ import javax.persistence.Table;
 public class Account {
 	
 	@Id @GeneratedValue
-	@Column(name = "ACCOUNT_ID")
-	private long accountId;
+	private long id;
 	
-	@Column(name = "NAME")
 	private String name;
-
-	@Column(name = "EMAIL")
+	
 	private String email;
 	
-	@Column(name = "PASSWORD")
 	private String password;
 	
 	public Account(){}
@@ -40,7 +36,7 @@ public class Account {
 	 * @return accountId
 	 */
 	public long getAccountId() {
-		return accountId;
+		return id;
 	}
 
 	/**
@@ -50,7 +46,7 @@ public class Account {
 	 */
 	@SuppressWarnings("unused")
 	private void setAccountId(long accountId) {
-		this.accountId = accountId;
+		this.id = accountId;
 	}
 
 	/**

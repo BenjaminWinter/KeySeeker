@@ -29,10 +29,10 @@
 		<property name="format_sql">false</property>
 
 		<!--  Load all mapping files -->
-		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Account" />
-		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Hero" />
-		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Ability" />
-		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Image" />
-		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Mapping.Item" />
+		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Model.Account" />
+		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Model.Hero" />
+		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Model.Ability" />
+		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Model.Image" />
+		<mapping class="de.bht.swp.ui_prototype.client.hibernate.Model.Item" />
 	</session-factory>
 </hibernate-configuration>

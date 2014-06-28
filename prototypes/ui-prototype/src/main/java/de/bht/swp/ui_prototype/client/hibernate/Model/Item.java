@@ -1,4 +1,4 @@
-package de.bht.swp.ui_prototype.client.hibernate.Mapping;
+package de.bht.swp.ui_prototype.client.hibernate.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,10 +15,8 @@ import org.hibernate.annotations.ForeignKey;
 public class Item {
 	
 	@Id @GeneratedValue
-	@Column(name = "ITEM_ID")
-	private long itemId;
+	private long id;
 	
-	@Column(name = "NAME")
 	private String name;
 	
 	@OneToOne
@@ -26,11 +24,11 @@ public class Item {
 	private Ability ability;
 
 	public long getItemId() {
-		return itemId;
+		return id;
 	}
 
 	public void setItemId(long itemId) {
-		this.itemId = itemId;
+		this.id = itemId;
 	}
 
 	public String getName() {
@@ -51,7 +49,7 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item [itemId=" + itemId + ", name=" + name + ", ability="
+		return "Item [itemId=" + id + ", name=" + name + ", ability="
 				+ ability + "]";
 	}
 
@@ -60,7 +58,7 @@ public class Item {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((ability == null) ? 0 : ability.hashCode());
-		result = prime * result + (int) (itemId ^ (itemId >>> 32));
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -79,7 +77,7 @@ public class Item {
 				return false;
 		} else if (!ability.equals(other.ability))
 			return false;
-		if (itemId != other.itemId)
+		if (id != other.id)
 			return false;
 		if (name == null) {
 			if (other.name != null)

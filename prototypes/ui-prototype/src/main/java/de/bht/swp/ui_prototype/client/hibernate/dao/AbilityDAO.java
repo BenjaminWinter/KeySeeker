@@ -2,7 +2,7 @@ package de.bht.swp.ui_prototype.client.hibernate.dao;
 
 
 
-import de.bht.swp.ui_prototype.client.hibernate.Mapping.Ability;
+import de.bht.swp.ui_prototype.client.hibernate.Model.Ability;
 
 
 

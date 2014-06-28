@@ -1,4 +1,4 @@
-package de.bht.swp.ui_prototype.client.hibernate.Mapping;
+package de.bht.swp.ui_prototype.client.hibernate.Model;
 
 import java.io.File;
 
@@ -13,40 +13,38 @@ import javax.persistence.Table;
 public class Image {
 
 	@Id @GeneratedValue
-	@Column(name = "IMAGE_ID")
-	private long imageId;
+	private long id;
 	
-	@Column(name = "PATH")
-	private File imagefile;
+	private String path;
 
 	public long getImageId() {
-		return imageId;
+		return id;
 	}
 
 	public void setImageId(long imageId) {
-		this.imageId = imageId;
+		this.id = imageId;
 	}
 
-	public File getImagefile() {
-		return imagefile;
+	public String getImagefile() {
+		return path;
 	}
 
-	public void setImagefile(File imagefile) {
-		this.imagefile = imagefile;
+	public void setImagefile(String imagepath) {
+		this.path = imagepath;
 	}
 
 	@Override
 	public String toString() {
-		return "Image [imageId=" + imageId + ", imagefile=" + imagefile + "]";
+		return "Image [imageId=" + id + ", imagefile=" + path + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (imageId ^ (imageId >>> 32));
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result
-				+ ((imagefile == null) ? 0 : imagefile.hashCode());
+				+ ((path == null) ? 0 : path.hashCode());
 		return result;
 	}
 
@@ -59,12 +57,12 @@ public class Image {
 		if (getClass() != obj.getClass())
 			return false;
 		Image other = (Image) obj;
-		if (imageId != other.imageId)
+		if (id != other.id)
 			return false;
-		if (imagefile == null) {
-			if (other.imagefile != null)
+		if (path == null) {
+			if (other.path != null)
 				return false;
-		} else if (!imagefile.equals(other.imagefile))
+		} else if (!path.equals(other.path))
 			return false;
 		return true;
 	}

@@ -1,6 +1,6 @@
 package de.bht.swp.ui_prototype.client.hibernate.dao;
 
-import de.bht.swp.ui_prototype.client.hibernate.Mapping.Account;
+import de.bht.swp.ui_prototype.client.hibernate.Model.Account;
 
 
 /**
