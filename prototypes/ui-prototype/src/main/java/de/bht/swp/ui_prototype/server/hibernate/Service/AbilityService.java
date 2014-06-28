@@ -1,8 +1,8 @@
-package de.bht.swp.ui_prototype.client.hibernate.Service;
+package de.bht.swp.ui_prototype.server.hibernate.Service;
 
-import de.bht.swp.ui_prototype.client.hibernate.Model.Ability;
-import de.bht.swp.ui_prototype.client.hibernate.dao.AbilityDAO;
-import de.bht.swp.ui_prototype.client.hibernate.dao.DAOFactory;
+import de.bht.swp.ui_prototype.client.DBObject.Ability;
+import de.bht.swp.ui_prototype.server.hibernate.DAO.AbilityDAO;
+import de.bht.swp.ui_prototype.server.hibernate.Util.DAOFactory;
 
 
 /**

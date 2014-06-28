@@ -1,4 +1,4 @@
-package de.bht.swp.ui_prototype.client.hibernate.dao;
+package de.bht.swp.ui_prototype.server.hibernate.DAO;
 
 public interface GenericDAO<T> {
 	

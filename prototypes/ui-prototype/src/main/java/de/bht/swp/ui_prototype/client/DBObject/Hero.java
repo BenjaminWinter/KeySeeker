@@ -1,4 +1,4 @@
-package de.bht.swp.ui_prototype.client.hibernate.Model;
+package de.bht.swp.ui_prototype.client.DBObject;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

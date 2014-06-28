@@ -1,4 +1,4 @@
-package de.bht.swp.ui_prototype.client.hibernate.Util;
+package de.bht.swp.ui_prototype.server.hibernate.Util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;

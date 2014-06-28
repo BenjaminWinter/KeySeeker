@@ -1,8 +1,8 @@
-package de.bht.swp.ui_prototype.client.hibernate.Service;
+package de.bht.swp.ui_prototype.server.hibernate.Service;
 
-import de.bht.swp.ui_prototype.client.hibernate.Model.Account;
-import de.bht.swp.ui_prototype.client.hibernate.dao.AccountDAO;
-import de.bht.swp.ui_prototype.client.hibernate.dao.DAOFactory;
+import de.bht.swp.ui_prototype.client.DBObject.Account;
+import de.bht.swp.ui_prototype.server.hibernate.DAO.AccountDAO;
+import de.bht.swp.ui_prototype.server.hibernate.Util.DAOFactory;
 
 
 /**
