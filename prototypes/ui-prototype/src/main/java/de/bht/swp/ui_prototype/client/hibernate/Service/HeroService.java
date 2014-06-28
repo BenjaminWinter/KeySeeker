@@ -1,6 +1,7 @@
 package de.bht.swp.ui_prototype.client.hibernate.Service;
 
 import de.bht.swp.ui_prototype.client.hibernate.Mapping.Hero;
+import de.bht.swp.ui_prototype.client.hibernate.dao.DAOFactory;
 import de.bht.swp.ui_prototype.client.hibernate.dao.HeroDAO;
 
 
@@ -8,7 +9,7 @@ import de.bht.swp.ui_prototype.client.hibernate.dao.HeroDAO;
  * Service layer for Hero
  */
 public class HeroService {
-	HeroDAO heroDAO = new HeroDAO();
+	HeroDAO heroDAO = new DAOFactory().getHeroDAO();
 
 	/**
 	 * Create a new hero or update an existing one
@@ -17,7 +18,7 @@ public class HeroService {
 	 *            hero to be persisted
 	 */
 	public void saveOrUpdateHero(Hero hero) {
-		heroDAO.saveOrUpdateHero(hero);
+		heroDAO.saveOrUpdate(hero);
 	}
 
 	/**
@@ -28,7 +29,7 @@ public class HeroService {
 	 * @return hero represented by the identifier provided
 	 */
 	public Hero getHero(long heroId) {
-		return heroDAO.getHero(heroId);
+		return heroDAO.get(heroId);
 	}
 
 	/**
@@ -38,6 +39,6 @@ public class HeroService {
 	 *            hero to be deleted
 	 */
 	public void deleteHero(Hero hero) {
-		heroDAO.deleteHero(hero);
+		heroDAO.delete(hero);
 	}
 }

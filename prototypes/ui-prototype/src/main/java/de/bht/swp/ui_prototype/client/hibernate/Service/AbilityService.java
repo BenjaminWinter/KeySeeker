@@ -2,13 +2,14 @@ package de.bht.swp.ui_prototype.client.hibernate.Service;
 
 import de.bht.swp.ui_prototype.client.hibernate.Mapping.Ability;
 import de.bht.swp.ui_prototype.client.hibernate.dao.AbilityDAO;
+import de.bht.swp.ui_prototype.client.hibernate.dao.DAOFactory;
 
 
 /**
  * Service layer for Ability
  */
 public class AbilityService {
-	AbilityDAO abilityDAO = new AbilityDAO();
+	AbilityDAO abilityDAO = new DAOFactory().getAbilityDAO();
 
 	/**
 	 * Create a new ability or update an existing one
@@ -17,7 +18,7 @@ public class AbilityService {
 	 *            ability to be persisted
 	 */
 	public void saveOrUpdateAbility(Ability ability) {
-		abilityDAO.saveOrUpdateAbility(ability);
+		abilityDAO.saveOrUpdate(ability);
 	}
 
 	/**
@@ -28,9 +29,8 @@ public class AbilityService {
 	 * @return ability represented by the identifier provided
 	 */
 	public Ability getAbility(long abilityId) {
-		return abilityDAO.getAbility(abilityId);
+		return abilityDAO.get(abilityId);
 	}
-
 	/**
 	 * Delete ability
 	 * 
@@ -38,6 +38,6 @@ public class AbilityService {
 	 *            ability to be deleted
 	 */
 	public void deleteAbility(Ability ability) {
-		abilityDAO.deleteAbility(ability);
+		abilityDAO.delete(ability);
 	}
 }

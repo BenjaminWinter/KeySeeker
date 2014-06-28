@@ -1,6 +1,7 @@
 package de.bht.swp.ui_prototype.client.hibernate.Service;
 
 import de.bht.swp.ui_prototype.client.hibernate.Mapping.Item;
+import de.bht.swp.ui_prototype.client.hibernate.dao.DAOFactory;
 import de.bht.swp.ui_prototype.client.hibernate.dao.ItemDAO;
 
 
@@ -8,7 +9,7 @@ import de.bht.swp.ui_prototype.client.hibernate.dao.ItemDAO;
  * Service layer for Item
  */
 public class ItemService {
-	ItemDAO itemDAO = new ItemDAO();
+	ItemDAO itemDAO = new DAOFactory().getItemDAO();
 
 	/**
 	 * Create a new item or update an existing one
@@ -17,7 +18,7 @@ public class ItemService {
 	 *            item to be persisted
 	 */
 	public void saveOrUpdateItem(Item item) {
-		itemDAO.saveOrUpdateItem(item);
+		itemDAO.saveOrUpdate(item);
 	}
 
 	/**
@@ -28,7 +29,7 @@ public class ItemService {
 	 * @return item represented by the identifier provided
 	 */
 	public Item getItem(long itemId) {
-		return itemDAO.getItem(itemId);
+		return itemDAO.get(itemId);
 	}
 
 	/**
@@ -38,6 +39,6 @@ public class ItemService {
 	 *            item to be deleted
 	 */
 	public void deleteItem(Item item) {
-		itemDAO.deleteItem(item);
+		itemDAO.delete(item);
 	}
 }

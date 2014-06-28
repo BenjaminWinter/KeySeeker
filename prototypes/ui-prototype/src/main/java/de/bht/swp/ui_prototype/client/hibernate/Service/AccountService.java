@@ -2,13 +2,14 @@ package de.bht.swp.ui_prototype.client.hibernate.Service;
 
 import de.bht.swp.ui_prototype.client.hibernate.Mapping.Account;
 import de.bht.swp.ui_prototype.client.hibernate.dao.AccountDAO;
+import de.bht.swp.ui_prototype.client.hibernate.dao.DAOFactory;
 
 
 /**
  * Service layer for Account
  */
 public class AccountService {
-	AccountDAO accountDAO = new AccountDAO();
+	AccountDAO accountDAO = new DAOFactory().getAccountDAO();
 
 	/**
 	 * Create a new account or update an existing one
@@ -17,7 +18,7 @@ public class AccountService {
 	 *            account to be persisted
 	 */
 	public void saveOrUpdateAccount(Account account) {
-		accountDAO.saveOrUpdateAccount(account);
+		accountDAO.saveOrUpdate(account);
 	}
 
 	/**
@@ -28,7 +29,7 @@ public class AccountService {
 	 * @return account represented by the identifier provided
 	 */
 	public Account getAccount(long accountId) {
-		return accountDAO.getAccount(accountId);
+		return accountDAO.get(accountId);
 	}
 
 	/**
@@ -38,6 +39,6 @@ public class AccountService {
 	 *            account to be deleted
 	 */
 	public void deleteAccount(Account account) {
-		accountDAO.deleteAccount(account);
+		accountDAO.delete(account);
 	}
 }
