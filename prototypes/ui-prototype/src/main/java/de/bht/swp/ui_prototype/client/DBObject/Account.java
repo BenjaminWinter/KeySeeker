@@ -3,6 +3,8 @@ package de.bht.swp.ui_prototype.client.DBObject;
 
 
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,8 +20,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ACCOUNT")
-public class Account {
-	
+public class Account implements Serializable{
+
 	@Id @GeneratedValue
 	private long id;
 	
