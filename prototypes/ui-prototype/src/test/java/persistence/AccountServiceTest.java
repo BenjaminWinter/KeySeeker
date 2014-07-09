@@ -40,6 +40,7 @@ public class AccountServiceTest extends ServiceTest {
 		AccountService accountService = new AccountService();
 		accountService.saveOrUpdateAccount(account);
 
+		session.getTransaction().commit();
 		HibernateUtil.getSessionFactory().close();
 
 		System.out.println("var account = " + account);
@@ -58,9 +59,17 @@ public class AccountServiceTest extends ServiceTest {
 	 */
 	@Test
 	public void testGetAccount() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 
 		Account account = createAccount();
 		System.out.println("var account = " + account);
+
+		session.getTransaction().commit();
+		HibernateUtil.getSessionFactory().close();
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 
 		AccountService accountService = new AccountService();
 		Account anotherCopy = accountService.getAccount(account.getAccountId());
@@ -70,6 +79,10 @@ public class AccountServiceTest extends ServiceTest {
 		// make sure these are two separate instances
 		// ---- ---- ----- --- --- -------- ---------
 		Assert.assertTrue(account != anotherCopy);
+
+		session.getTransaction().commit();
+		HibernateUtil.getSessionFactory().close();
+
 		// cleanup
 		// -------
 		deleteAccount(account);
@@ -80,12 +93,21 @@ public class AccountServiceTest extends ServiceTest {
 	 */
 	@Test
 	public void testUpdateAccountName() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+
 		Account account = createAccount();
 		System.out.println("var account = " + account.getAccountName());
 
 		AccountService accountService = new AccountService();
 		account.setAccountName("tester42");
 		accountService.saveOrUpdateAccount(account);
+		session.getTransaction().commit();
+		HibernateUtil.getSessionFactory().close();
+
+		Session session2 = HibernateUtil.getSessionFactory()
+				.getCurrentSession();
+		session2.beginTransaction();
 
 		Account anotherCopy = accountService.getAccount(account.getAccountId());
 		System.out.println("var anotherCopy = " + anotherCopy.getAccountName());
@@ -94,6 +116,9 @@ public class AccountServiceTest extends ServiceTest {
 		// from the database has the updated balance
 		// -----------------------------------------
 		Assert.assertTrue(anotherCopy.getAccountName().equals("tester42"));
+
+		session2.getTransaction().commit();
+		HibernateUtil.getSessionFactory().close();
 
 		// cleanup
 		// -------
@@ -106,6 +131,8 @@ public class AccountServiceTest extends ServiceTest {
 	 */
 	@Test
 	public void testUpdateAccountPassword() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 
 		Account account = createAccount();
 		System.out.println("var account = " + account);
@@ -113,6 +140,12 @@ public class AccountServiceTest extends ServiceTest {
 		AccountService accountService = new AccountService();
 		account.setPassword("1111");
 		accountService.saveOrUpdateAccount(account);
+		session.getTransaction().commit();
+		HibernateUtil.getSessionFactory().close();
+
+		Session session2 = HibernateUtil.getSessionFactory()
+				.getCurrentSession();
+		session2.beginTransaction();
 
 		Account anotherCopy = accountService.getAccount(account.getAccountId());
 		System.out.println("var anotherCopy = " + anotherCopy);
@@ -121,6 +154,9 @@ public class AccountServiceTest extends ServiceTest {
 		// the database does have the updated balance
 		// ----------------------------------------------
 		Assert.assertTrue(anotherCopy.getPassword().equals("1111"));
+
+		session2.getTransaction().commit();
+		HibernateUtil.getSessionFactory().close();
 
 		// cleanup
 		// -------
@@ -132,6 +168,8 @@ public class AccountServiceTest extends ServiceTest {
 	 */
 	@Test
 	public void testDeleteAccount() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 
 		Account account = createAccount();
 		System.out.println("var account = " + account);
@@ -141,14 +179,22 @@ public class AccountServiceTest extends ServiceTest {
 		AccountService accountService = new AccountService();
 		accountService.deleteAccount(account);
 
+		session.getTransaction().commit();
+		HibernateUtil.getSessionFactory().close();
 
 		// try to get the account again -- should be null
 		// --- -- --- --- ------- ----- -- ------ -- ----
+		Session session2 = HibernateUtil.getSessionFactory()
+				.getCurrentSession();
+		session2.beginTransaction();
 
 		Account anotherCopy = accountService.getAccount(account.getAccountId());
 
 		System.out.println("var anotherCopy = " + anotherCopy);
 
 		Assert.assertNull(anotherCopy);
+
+		session2.getTransaction().commit();
+		HibernateUtil.getSessionFactory().close();
 	}
 }

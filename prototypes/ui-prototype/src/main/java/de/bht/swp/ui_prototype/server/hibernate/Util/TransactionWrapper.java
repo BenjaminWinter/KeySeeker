@@ -18,7 +18,7 @@ public class TransactionWrapper{
 		} catch (Exception e){
 			if(transaction != null){
 				transaction.rollback();
-				result = "Transaction Error";
+				result = null;
 				System.err.println(e.getMessage());
 			}
 		} finally {

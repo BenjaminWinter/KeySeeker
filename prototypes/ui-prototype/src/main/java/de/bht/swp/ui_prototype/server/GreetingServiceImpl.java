@@ -66,12 +66,12 @@ public String loginUser(final String name, String passwort)
 		}
 		
 	};
-	Account account = (Account) tw.run(getAccount);
+	Object account = tw.run(getAccount);
 	if (account == null){
 		return "false";
 	}
 
-	String accPassword = account.getPassword();
+	String accPassword =  ((Account) account).getPassword();
 	if (accPassword.equals(passwort)){
 		return "true";
 	}

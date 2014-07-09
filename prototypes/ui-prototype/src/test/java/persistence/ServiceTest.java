@@ -4,13 +4,10 @@ import java.io.File;
 
 import org.hibernate.Session;
 
-import de.bht.swp.ui_prototype.client.DBObject.Ability;
 import de.bht.swp.ui_prototype.client.DBObject.Account;
-import de.bht.swp.ui_prototype.client.DBObject.Hero;
-import de.bht.swp.ui_prototype.client.DBObject.Image;
 import de.bht.swp.ui_prototype.server.hibernate.Service.AccountService;
-import de.bht.swp.ui_prototype.server.hibernate.Service.HeroService;
 import de.bht.swp.ui_prototype.server.hibernate.Util.HibernateUtil;
+
 
 
 /**
@@ -45,7 +42,11 @@ public abstract class ServiceTest {
 	 * @param account account to be deleted
 	 */
 	protected void deleteAccount(Account account) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		AccountService accountService = new AccountService();
 		accountService.deleteAccount(account);
+		session.getTransaction().commit();
+		HibernateUtil.getSessionFactory().close();
 	}
 }

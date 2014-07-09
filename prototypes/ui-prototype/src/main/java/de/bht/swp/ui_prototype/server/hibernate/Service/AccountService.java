@@ -22,21 +22,7 @@ public class AccountService {
 	 *            account to be persisted
 	 */
 	public void saveOrUpdateAccount(Account account) {
-		if(isValidEmail(account.getEmail())){
-			if(isValidAccName(account.getAccountName())){
-				if(isValidPassword(account.getPassword())){
-					accountDAO.saveOrUpdate(account);
-				} else {
-					throw new IllegalArgumentException("Password invalid");
-				}
-				
-			} else {
-				throw new IllegalArgumentException("AccountName is invalid");
-			}
-		} else {
-			throw new IllegalArgumentException("Email is Invalid");
-		}
-		
+		accountDAO.saveOrUpdate(account);
 	}
 
 	/**
@@ -62,15 +48,5 @@ public class AccountService {
 	 */
 	public void deleteAccount(Account account) {
 		accountDAO.delete(account);
-	}
-	private static boolean isValidEmail(String emailAddress) {
-	    return emailAddress.contains(" ") == false && emailAddress.matches(".+@.+\\.[a-z]+");
-	}
-	private static boolean isValidAccName(String accname){
-		return accname.contains(" ") == false && accname.length() > 2 && accname.length() < 12;
-	}
-	
-	private static boolean isValidPassword(String password){
-		return password.length() > 0;
 	}
 }
