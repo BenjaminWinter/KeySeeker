@@ -10,6 +10,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -47,6 +48,9 @@ public class InputPanel extends Composite {
 	Label lifeValue;
 	
 	prototype proto = new prototype();
+	
+	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
 	
 	private static InputPanelUiBinder uiBinder = GWT
 			.create(InputPanelUiBinder.class);
@@ -87,14 +91,23 @@ public class InputPanel extends Composite {
 		  String loginPassword = loginNameTextBox.getText();
 		  
 		  //Todo: ask the database here
-		  boolean validLogin = true;
 		  
-		  if(validLogin) {
-			  loginDiv.getStyle().setDisplay(Display.NONE);
-			  characterCreationDiv.getStyle().setDisplay(Display.BLOCK);
-		  } else {
-			  Window.alert("Wrong Name or Password!");
-		  }
+		  greetingService.loginUser(loginName, loginPassword,
+					new AsyncCallback<String>() {
+
+						public void onFailure(Throwable caught) {
+							Window.alert("BOOOOM!!!!!");
+						}
+
+						public void onSuccess(String result) {
+							if(result.equals("true")) {
+								  loginDiv.getStyle().setDisplay(Display.NONE);
+								  characterCreationDiv.getStyle().setDisplay(Display.BLOCK);
+							  } else {
+								  Window.alert("Wrong Name or Password!");
+							  }
+						}
+		  });
 	  }
 	  
 	  @UiHandler("confirmButton")

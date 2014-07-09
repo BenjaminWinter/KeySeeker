@@ -8,6 +8,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
@@ -28,6 +29,12 @@ public class RegistrationPanel extends Composite {
 	@UiField
 	TextBox registerEMailTextBox;
 	
+	/**
+	* Create a remote service proxy to talk to the server-side Greeting service.
+	*/
+	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+	
 	prototype proto = new prototype();
 	
 	private static RegistrationPanelUiBinder uiBinder = GWT
@@ -46,16 +53,25 @@ public class RegistrationPanel extends Composite {
 	@UiHandler("registerButton")
 	  void onRegister(ClickEvent e) {
 		  
-		  String loginEmail = registerEMailTextBox.getText();
-		  String loginName = registerNameTextBox.getText();
-		  String loginPassword = registerPasswordTextBox.getText();
+		  String registerEmail = registerEMailTextBox.getText();
+		  String registerName = registerNameTextBox.getText();
+		  String registerPassword = registerPasswordTextBox.getText();
 		  
 //		  Todo: ask the database here
 //		  boolean validLogin = true;
-		  
-		  registerDiv.getStyle().setDisplay(Display.NONE);
-		  logoDiv.getStyle().setDisplay(Display.NONE);
-		  proto.changePanelLogin();
+		  greetingService.registerUser(registerName, registerPassword, registerEmail,
+					new AsyncCallback<String>() {
+
+						public void onFailure(Throwable caught) {
+							Window.alert("register BOOOOM!!!!!");
+						}
+
+						public void onSuccess(String result) {
+							 registerDiv.getStyle().setDisplay(Display.NONE);
+							 logoDiv.getStyle().setDisplay(Display.NONE);
+							 proto.changePanelLogin();
+						}
+		  });
 	  }
 
 }
