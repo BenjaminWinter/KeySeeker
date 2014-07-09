@@ -13,7 +13,7 @@
 				<g:Button ui:field="testButton"> TEST </g:Button>
 			</g:VerticalPanel>
 	-->
-	<div style="background-image:url(/images/KeySeekerLogo.png); margin:30px; padding:100px; background-size: 20%; background-position: 50% 0%; background-repeat:no-repeat"> </div>
+	<div ui:field="logoDiv" style="background-image:url(/images/KeySeekerLogo.png); margin:30px; padding:100px; background-size: 20%; background-position: 50% 0%; background-repeat:no-repeat"> </div>
 	<div ui:field="loginDiv">
 		<table align="center">
      	 <tr>
@@ -34,7 +34,7 @@
      	 	</td>
      	 </tr>
      	 <tr>
-     	 	<td> <g:Hyperlink> Registrieren</g:Hyperlink> </td>
+     	 	<td> <g:Hyperlink ui:field="registerButton">> Registrieren</g:Hyperlink> </td>
      	 </tr>
     	</table>
 	</div>

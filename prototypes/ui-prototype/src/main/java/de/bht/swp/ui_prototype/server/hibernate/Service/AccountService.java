@@ -49,6 +49,10 @@ public class AccountService {
 	public Account getAccount(long accountId) {
 		return accountDAO.get(accountId);
 	}
+	
+	public Account getAccount(String name) {
+		return accountDAO.get(name);
+	}
 
 	/**
 	 * Delete account

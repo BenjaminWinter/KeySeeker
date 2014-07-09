@@ -52,17 +52,32 @@ public class prototype implements EntryPoint {
   protected Canvas miniMapCanvas;
   protected Context2d context;
   protected ImageElement mapImageElement;
+  InputPanel ip;
+  
   
   
   /**
    * This is the entry point method.
    */
   public void onModuleLoad() {
-	  InputPanel ip = new InputPanel();
+	  
+	  ip = new InputPanel();
 	  RootPanel.get().add(ip);
 	  
 //	  ip.testButton.setText("funkt");
 	  
+  }
+  
+  public void changePanelLogin() {
+	  RootPanel.get().add(new InputPanel());
+//	  RootPanel.get().remove(ip);
+//	  ip.removeFromParent();
+  }
+  
+  public void changePanelRegister() {
+	  RootPanel.get().add(new RegistrationPanel());
+//	  RootPanel.get().remove(ip);
+//	  ip.removeFromParent();
   }
   
 
