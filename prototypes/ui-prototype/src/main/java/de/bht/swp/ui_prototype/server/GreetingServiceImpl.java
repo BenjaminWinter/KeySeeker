@@ -3,6 +3,7 @@ package de.bht.swp.ui_prototype.server;
 import org.hibernate.Session;
 
 import de.bht.swp.ui_prototype.client.GreetingService;
+import de.bht.swp.ui_prototype.client.DBObject.Account;
 import de.bht.swp.ui_prototype.server.hibernate.Service.AccountService;
 import de.bht.swp.ui_prototype.server.hibernate.Util.Action;
 import de.bht.swp.ui_prototype.server.hibernate.Util.TransactionWrapper;
@@ -53,34 +54,54 @@ private AccountService as = new AccountService();
         ">", "&gt;");
   }
 
-public String loginUser(String name, String passwort)
+public String loginUser(final String name, String passwort)
 		throws IllegalArgumentException {
 	
-	Action getName = new Action(){
+	Action getAccount = new Action(){
 
 		@Override
 		public Object execute(Session session) {
-			session.
-			return null;
+		
+			return as.getAccount(name);
 		}
 		
 	};
-	Action getPassword = new Action(){
+	Account account = (Account) tw.run(getAccount);
+	if (account == null){
+		return "false";
+	}
+
+	String accPassword = account.getPassword();
+	if (accPassword.equals(passwort)){
+		return "true";
+	}
+	return "false";
+}
+
+public String registerUser(String name, String passwort,String email)
+		throws IllegalArgumentException {
+ 
+	final Account account = new Account();
+	account.setAccountName(name);
+	account.setEmail(email);
+	account.setPassword(passwort);
+	
+	Action registerUser = new Action(){
 
 		@Override
 		public Object execute(Session session) {
+			as.saveOrUpdateAccount(account);
 			
 			return null;
 		}
 		
 	};
-	return null;
-}
-
-public String registerUser(String name, String passwort,String email)
-		throws IllegalArgumentException {
-	// TODO Auto-generated method stub
-	return null;
+	Object result = tw.run(registerUser);
+	if (result.equals("Transaction Error")){
+		return "false";
+	}
+	
+	return "true";
 }
 
 
