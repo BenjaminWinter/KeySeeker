@@ -10,7 +10,9 @@ public interface GreetingServiceAsync
      * GWT-RPC service  asynchronous (client-side) interface
      * @see de.bht.swp.ui_prototype.client.GreetingService
      */
-    void greetServer( java.lang.String name, AsyncCallback<java.lang.String> callback );
+    void greetServer( String name, AsyncCallback<String> callback );
+    void loginUser( String name,String passwort, AsyncCallback<String> callback );
+    void registerUser(String name, String passwort,String email, AsyncCallback<String> callback );
 
 
     /**

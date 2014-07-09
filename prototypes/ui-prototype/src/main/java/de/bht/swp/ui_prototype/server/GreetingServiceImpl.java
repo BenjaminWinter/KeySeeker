@@ -1,7 +1,13 @@
 package de.bht.swp.ui_prototype.server;
 
+import org.hibernate.Session;
+
 import de.bht.swp.ui_prototype.client.GreetingService;
+import de.bht.swp.ui_prototype.server.hibernate.Service.AccountService;
+import de.bht.swp.ui_prototype.server.hibernate.Util.Action;
+import de.bht.swp.ui_prototype.server.hibernate.Util.TransactionWrapper;
 import de.bht.swp.ui_prototype.shared.FieldVerifier;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
@@ -10,7 +16,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class GreetingServiceImpl extends RemoteServiceServlet implements
     GreetingService {
-
+private TransactionWrapper tw = new TransactionWrapper();
+private AccountService as = new AccountService();
   public String greetServer(String input) throws IllegalArgumentException {
     // Verify that the input is valid.
     if (!FieldVerifier.isValidName(input)) {
@@ -45,4 +52,36 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
     return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(
         ">", "&gt;");
   }
+
+public String loginUser(String name, String passwort)
+		throws IllegalArgumentException {
+	
+	Action getName = new Action(){
+
+		@Override
+		public Object execute(Session session) {
+			session.
+			return null;
+		}
+		
+	};
+	Action getPassword = new Action(){
+
+		@Override
+		public Object execute(Session session) {
+			
+			return null;
+		}
+		
+	};
+	return null;
+}
+
+public String registerUser(String name, String passwort,String email)
+		throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
 }
