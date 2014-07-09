@@ -1,0 +1,38 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	
+	
+	</ui:style>
+	<g:HTMLPanel>
+	
+	<div ui:field="logoDiv" style="background-image:url(/images/KeySeekerLogo.png); margin:30px; padding:100px; background-size: 20%; background-position: 50% 0%; background-repeat:no-repeat"> </div>
+	<div ui:field="registerDiv">
+	<table align="center">
+     	 <tr>
+     	   <td colspan="2" style="font-weight:bold; font-size:18px">Registrieren:</td>   
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Label> E-Mail:</g:Label> </td>
+     	 	<td> <g:TextBox ui:field="registerEMailTextBox"> </g:TextBox> </td>
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Label> Anmeldename:</g:Label> </td>
+     	 	<td> <g:TextBox ui:field="registerNameTextBox"> </g:TextBox> </td>
+     	 </tr>
+     	 <tr>
+     	 	<td> <g:Label> Password:</g:Label> </td>
+     	 	<td> <g:PasswordTextBox ui:field="registerPasswordTextBox"> </g:PasswordTextBox> </td>
+     	 </tr>
+     	 <tr>
+     	 <td></td>
+     	 	<td>
+     	 		<g:Button ui:field="registerButton"> Registrieren </g:Button>
+     	 	</td>
+     	 </tr>
+    	</table>
+    	</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

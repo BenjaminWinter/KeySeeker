@@ -30,6 +30,8 @@ public class InputPanel extends Composite {
 	@UiField
 	Button confirmButton;
 	@UiField
+	DivElement logoDiv;
+	@UiField
 	DivElement loginDiv;
 	@UiField
 	DivElement characterCreationDiv;
@@ -100,5 +102,12 @@ public class InputPanel extends Composite {
 		  characterCreationDiv.getStyle().setDisplay(Display.NONE);
 		  proto.onStartGame(gameDiv);
 		  proto.draw();
+	  }
+	  
+	  @UiHandler("registerButton")
+	  void onRegister(ClickEvent e) {
+		  logoDiv.getStyle().setDisplay(Display.NONE);
+		  loginDiv.getStyle().setDisplay(Display.NONE);
+		  proto.changePanelRegister();
 	  }
 }
